@@ -1,0 +1,82 @@
+[
+  {
+    "name": "erd-core",
+    "caption": "Identity and clinic ownership"
+  },
+  {
+    "name": "erd-scheduling-resources",
+    "caption": "Services and scheduling resources"
+  },
+  {
+    "name": "erd-scheduling-calendar",
+    "caption": "Recurring and dated availability"
+  },
+  {
+    "name": "erd-scheduling-bookings",
+    "caption": "Bookings and replay protection"
+  },
+  {
+    "name": "erd-clinical",
+    "caption": "Clinical history and access"
+  },
+  {
+    "name": "erd-integrations-billing",
+    "caption": "Subscription and provider inbox"
+  },
+  {
+    "name": "erd-integrations-delivery",
+    "caption": "Commerce and notification delivery"
+  },
+  {
+    "name": "erd-platform",
+    "caption": "Platform and operational audit"
+  },
+  {
+    "name": "context",
+    "caption": "Context diagram of SmileSuite"
+  },
+  {
+    "name": "architecture",
+    "caption": "System architecture of SmileSuite"
+  },
+  {
+    "name": "usecase-patient",
+    "caption": "Patient portal"
+  },
+  {
+    "name": "usecase-staff",
+    "caption": "Clinic operations"
+  },
+  {
+    "name": "usecase-management",
+    "caption": "Management and content"
+  },
+  {
+    "name": "wireframe-login",
+    "caption": "Sign in"
+  },
+  {
+    "name": "wireframe-dashboard",
+    "caption": "Overview"
+  },
+  {
+    "name": "wireframe-booking",
+    "caption": "Book an appointment"
+  },
+  {
+    "name": "wireframe-profile",
+    "caption": "Profile"
+  },
+  {
+    "name": "wireframe-reports",
+    "caption": "Reports"
+  },
+  {
+    "name": "wireframe-content",
+    "caption": "Public content"
+  },
+  {
+    "name": "wireframe-cms",
+    "caption": "Content & CMS"
+  }
+]

@@ -1,0 +1,6 @@
+erDiagram
+    tenants ||--o| billing_checkout_sessions : "tenant_id"
+    tenants ||--o| billing_entitlements : "tenant_id"
+    subscriptions ||--o{ subscription_items : "subscription_id"
+    tenants ||--o{ subscriptions : "tenant_id"
+    tenants |o--o{ webhook_events : "tenant_id"

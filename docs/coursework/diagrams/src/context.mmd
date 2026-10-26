@@ -1,0 +1,15 @@
+flowchart LR
+ Patient[Patient] -->|Account, booking, intake| App((0 SmileSuite))
+ App -->|Appointments, content, status| Patient
+ Staff[Clinic staff] -->|Schedule and care updates| App
+ App -->|Permitted views| Staff
+ Owner[Clinic owner] -->|Configuration| App
+ App -->|Reports and status| Owner
+ Admin[Platform administrator] -->|Administration requests| App
+ App -->|Operational metadata| Admin
+ CMS[Directus CMS] -->|Published tenant content| App
+ App -->|Safe projections| CMS
+ Provider[Stripe / Shopify] -->|Events and catalog| App
+ App -->|Billing and cart requests| Provider
+ App -->|Minimal notices| Mail[Email delivery]
+ Mail -->|Delivery result| App

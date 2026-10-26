@@ -1,0 +1,11 @@
+erDiagram
+    tenants ||--o{ clinic_hours : "tenant_id"
+    tenants ||--o{ operatories : "tenant_id"
+    tenants ||--o{ practitioner_breaks : "tenant_id"
+    practitioners ||--o{ practitioner_breaks : "tenant_id+practitioner_id"
+    tenants ||--o{ practitioner_shifts : "tenant_id"
+    practitioners ||--o{ practitioner_shifts : "tenant_id+practitioner_id"
+    tenants ||--o{ practitioners : "tenant_id"
+    tenants ||--o{ schedule_blocks : "tenant_id"
+    operatories |o--o{ schedule_blocks : "tenant_id+operatory_id"
+    practitioners |o--o{ schedule_blocks : "tenant_id+practitioner_id"

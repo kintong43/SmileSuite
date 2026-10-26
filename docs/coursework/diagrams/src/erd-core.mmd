@@ -1,0 +1,10 @@
+erDiagram
+    tenants ||--o{ patient_profiles : "tenant_id"
+    users |o--o| patient_profiles : "tenant_id+user_id"
+    tenants ||--o{ practitioners : "tenant_id"
+    users ||--o| practitioners : "tenant_id+user_id"
+    tenants ||--o{ staff_invitations : "tenant_id"
+    users |o--o{ staff_invitations : "tenant_id+invited_by"
+    tenants ||--o{ user_roles : "tenant_id"
+    users ||--o{ user_roles : "tenant_id+user_id"
+    tenants ||--o{ users : "tenant_id"

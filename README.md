@@ -8,6 +8,19 @@ SmileSuite is a local, synthetic-data MVP for independent dental clinics: clinic
 
 This implementation is for development and review. It does not establish production readiness, regulatory approval, approved prices, or permission to use real patient data. Live billing, live commerce and real-patient-data flags default to disabled. See [the revised system plan](docs/smilesuite_system_plan_v2.md), particularly its Section 12 decision register, and [implementation evidence](docs/IMPLEMENTATION.md).
 
+## Coursework deliverables
+
+The course alignment adds self-service profiles and password changes, role-gated operational reports with CSV export, and an actual Directus CMS integration for public pages, announcements, service descriptions, safe staff data and aggregate reports. CMS identities and its database are separate from the clinic application.
+
+- [Requirements and submission checklist](docs/coursework/REQUIREMENTS.md)
+- [Business proposal](docs/coursework/BUSINESS_PROPOSAL.md) and [SRS](docs/coursework/SRS.md)
+- [System design: use cases, context, architecture, ERDs and wireframes](docs/coursework/SYSTEM_DESIGN.md)
+- [Database schema and complete data dictionary](docs/coursework/DATABASE_SCHEMA.md)
+- [CMS setup and real integration evidence](docs/coursework/CMS.md)
+- [Demonstration guide](docs/coursework/DEMO_GUIDE.md), [verification](docs/coursework/VERIFICATION.md), and [Git lab evidence](docs/coursework/GIT_LAB_EVIDENCE.md)
+
+The instructor's GitHub username has not been provided. The collaborator invitation is pending. The remote repository is currently named `SmileSuite`; the Git lab's prescribed repository name is a separate pending submission step.
+
 ## Clone and run
 
 For the prepared repository's first upload, see [GitHub handoff](docs/GITHUB.md).

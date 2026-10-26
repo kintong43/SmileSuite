@@ -1,0 +1,19 @@
+digraph G { graph [rankdir=LR, bgcolor="white", nodesep=0.36, ranksep=0.52, pad=0.12, splines=polyline]; node [shape=plain,fontname="Arial",fontsize=13]; edge [color="#555555",penwidth=1.1,arrowsize=0.8];
+"tenants" [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dddddd" COLSPAN="2"><B>tenants</B></TD></TR><TR><TD ALIGN="LEFT" PORT="id">id</TD><TD ALIGN="RIGHT">PK</TD></TR><TR><TD ALIGN="LEFT" PORT="subdomain">subdomain</TD><TD ALIGN="RIGHT"></TD></TR><TR><TD ALIGN="LEFT" PORT="timezone">timezone</TD><TD ALIGN="RIGHT"></TD></TR></TABLE>>];
+"practitioners" [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dddddd" COLSPAN="2"><B>practitioners</B></TD></TR><TR><TD ALIGN="LEFT" PORT="id">id</TD><TD ALIGN="RIGHT">PK</TD></TR><TR><TD ALIGN="LEFT" PORT="tenant_id">tenant_id</TD><TD ALIGN="RIGHT">FK</TD></TR><TR><TD ALIGN="LEFT" PORT="user_id">user_id</TD><TD ALIGN="RIGHT">FK</TD></TR></TABLE>>];
+"operatories" [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dddddd" COLSPAN="2"><B>operatories</B></TD></TR><TR><TD ALIGN="LEFT" PORT="id">id</TD><TD ALIGN="RIGHT">PK</TD></TR><TR><TD ALIGN="LEFT" PORT="tenant_id">tenant_id</TD><TD ALIGN="RIGHT">FK</TD></TR></TABLE>>];
+"clinic_hours" [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dddddd" COLSPAN="2"><B>clinic_hours</B></TD></TR><TR><TD ALIGN="LEFT" PORT="id">id</TD><TD ALIGN="RIGHT">PK</TD></TR><TR><TD ALIGN="LEFT" PORT="tenant_id">tenant_id</TD><TD ALIGN="RIGHT">FK</TD></TR></TABLE>>];
+"practitioner_shifts" [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dddddd" COLSPAN="2"><B>practitioner_shifts</B></TD></TR><TR><TD ALIGN="LEFT" PORT="id">id</TD><TD ALIGN="RIGHT">PK</TD></TR><TR><TD ALIGN="LEFT" PORT="tenant_id">tenant_id</TD><TD ALIGN="RIGHT">FK</TD></TR><TR><TD ALIGN="LEFT" PORT="practitioner_id">practitioner_id</TD><TD ALIGN="RIGHT">FK</TD></TR></TABLE>>];
+"practitioner_breaks" [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dddddd" COLSPAN="2"><B>practitioner_breaks</B></TD></TR><TR><TD ALIGN="LEFT" PORT="id">id</TD><TD ALIGN="RIGHT">PK</TD></TR><TR><TD ALIGN="LEFT" PORT="tenant_id">tenant_id</TD><TD ALIGN="RIGHT">FK</TD></TR><TR><TD ALIGN="LEFT" PORT="practitioner_id">practitioner_id</TD><TD ALIGN="RIGHT">FK</TD></TR></TABLE>>];
+"schedule_blocks" [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dddddd" COLSPAN="2"><B>schedule_blocks</B></TD></TR><TR><TD ALIGN="LEFT" PORT="id">id</TD><TD ALIGN="RIGHT">PK</TD></TR><TR><TD ALIGN="LEFT" PORT="tenant_id">tenant_id</TD><TD ALIGN="RIGHT">FK</TD></TR><TR><TD ALIGN="LEFT" PORT="practitioner_id">practitioner_id ?</TD><TD ALIGN="RIGHT">FK</TD></TR><TR><TD ALIGN="LEFT" PORT="operatory_id">operatory_id ?</TD><TD ALIGN="RIGHT">FK</TD></TR></TABLE>>];
+"tenants" -> "clinic_hours" [dir=both, arrowtail="teetee",arrowhead="crowodot"];
+"tenants" -> "operatories" [dir=both, arrowtail="teetee",arrowhead="crowodot"];
+"tenants" -> "practitioner_breaks" [dir=both, arrowtail="teetee",arrowhead="crowodot"];
+"practitioners" -> "practitioner_breaks" [dir=both, arrowtail="teetee",arrowhead="crowodot"];
+"tenants" -> "practitioner_shifts" [dir=both, arrowtail="teetee",arrowhead="crowodot"];
+"practitioners" -> "practitioner_shifts" [dir=both, arrowtail="teetee",arrowhead="crowodot"];
+"tenants" -> "practitioners" [dir=both, arrowtail="teetee",arrowhead="crowodot"];
+"tenants" -> "schedule_blocks" [dir=both, arrowtail="teetee",arrowhead="crowodot"];
+"operatories" -> "schedule_blocks" [dir=both, arrowtail="teeodot",arrowhead="crowodot"];
+"practitioners" -> "schedule_blocks" [dir=both, arrowtail="teeodot",arrowhead="crowodot"];
+}

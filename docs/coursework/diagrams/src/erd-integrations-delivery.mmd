@@ -1,0 +1,8 @@
+erDiagram
+    tenants ||--o{ appointments : "tenant_id"
+    tenants ||--o{ notification_deliveries : "tenant_id"
+    outbox_messages ||--o{ notification_deliveries : "tenant_id+outbox_message_id"
+    tenants ||--o{ outbox_messages : "tenant_id"
+    appointments ||--o{ outbox_messages : "tenant_id+resource_id"
+    tenants ||--o| shopify_connections : "tenant_id"
+    tenants ||--o{ shopping_carts : "tenant_id"

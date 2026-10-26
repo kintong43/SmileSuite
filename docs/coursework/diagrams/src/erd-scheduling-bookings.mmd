@@ -1,0 +1,7 @@
+erDiagram
+    appointments ||--o{ appointment_events : "tenant_id+appointment_id"
+    operatories ||--o{ appointments : "tenant_id+operatory_id"
+    patient_profiles ||--o{ appointments : "tenant_id+patient_id"
+    practitioners ||--o{ appointments : "tenant_id+practitioner_id"
+    services ||--o{ appointments : "tenant_id+service_id"
+    appointments ||--o{ idempotency_requests : "tenant_id+result_resource_id"

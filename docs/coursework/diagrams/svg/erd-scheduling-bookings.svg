@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="864" height="760" viewBox="0 0 864 760" role="img" aria-label="ERD · Bookings and replay protection"><rect width="864" height="760" fill="white"/><style>text{font-family:Arial,sans-serif;fill:#222} .small{font-size:13px} .body{font-size:16px} .heading{font-size:25px;font-weight:700} .line{fill:none;stroke:#444;stroke-width:1.6}</style><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="none" stroke="#444" stroke-width="1.2"/></marker></defs><text x="32" y="40" class="heading">ERD · Bookings and replay protection</text><text x="32" y="65" class="small">PostgreSQL 16.15 · crow’s foot · physical keys; module projection</text><svg x="32" y="92" width="800" height="550" viewBox="0 0 475 462"><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(8.64 453.24)">
+<title>G</title>
+<polygon fill="white" stroke="none" points="-8.64,8.64 -8.64,-453.24 466.04,-453.24 466.04,8.64 -8.64,8.64"/>
+<!-- appointments -->
+<g id="node1" class="node">
+<title>appointments</title>
+<polygon fill="none" stroke="black" points="145.8,-100 145.8,-306.8 266.79,-306.8 266.79,-100 145.8,-100"/>
+<polygon fill="#dddddd" stroke="none" points="146.8,-280.2 146.8,-305.8 265.79,-305.8 265.79,-280.2 146.8,-280.2"/>
+<text xml:space="preserve" text-anchor="start" x="163.68" y="-290.1" font-family="Arial" font-weight="bold" font-size="13.00">appointments</text>
+<text xml:space="preserve" text-anchor="start" x="151.8" y="-262.2" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="243.45" y="-262.2" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="151.8" y="-236.6" font-family="Arial" font-size="13.00">tenant_id</text>
+<text xml:space="preserve" text-anchor="start" x="244.18" y="-236.6" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="151.8" y="-211" font-family="Arial" font-size="13.00">patient_id</text>
+<text xml:space="preserve" text-anchor="start" x="244.18" y="-211" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="151.8" y="-185.4" font-family="Arial" font-size="13.00">practitioner_id</text>
+<text xml:space="preserve" text-anchor="start" x="244.18" y="-185.4" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="151.8" y="-159.8" font-family="Arial" font-size="13.00">operatory_id</text>
+<text xml:space="preserve" text-anchor="start" x="244.18" y="-159.8" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="151.8" y="-134.2" font-family="Arial" font-size="13.00">service_id</text>
+<text xml:space="preserve" text-anchor="start" x="244.18" y="-134.2" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="151.8" y="-108.6" font-family="Arial" font-size="13.00">status</text>
+</g>
+<!-- appointment_events -->
+<g id="node6" class="node">
+<title>appointment_events</title>
+<polygon fill="none" stroke="black" points="311.39,-216.4 311.39,-346.4 449.8,-346.4 449.8,-216.4 311.39,-216.4"/>
+<polygon fill="#dddddd" stroke="none" points="312.39,-319.8 312.39,-345.4 448.8,-345.4 448.8,-319.8 312.39,-319.8"/>
+<text xml:space="preserve" text-anchor="start" x="317.39" y="-329.7" font-family="Arial" font-weight="bold" font-size="13.00">appointment_events</text>
+<text xml:space="preserve" text-anchor="start" x="317.39" y="-301.8" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="426.46" y="-301.8" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="317.39" y="-276.2" font-family="Arial" font-size="13.00">tenant_id</text>
+<text xml:space="preserve" text-anchor="start" x="427.19" y="-276.2" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="317.39" y="-250.6" font-family="Arial" font-size="13.00">appointment_id</text>
+<text xml:space="preserve" text-anchor="start" x="427.19" y="-250.6" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="317.39" y="-225" font-family="Arial" font-size="13.00">actor_id ?</text>
+<text xml:space="preserve" text-anchor="start" x="427.19" y="-225" font-family="Arial" font-size="13.00">FK</text>
+</g>
+<!-- appointments&#45;&gt;appointment_events -->
+<g id="edge1" class="edge">
+<title>appointments&#45;&gt;appointment_events</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M273.81,-233.51C281.46,-236.97 289.33,-240.54 297.15,-244.08"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="265.67,-234.22 268.97,-226.93 270.43,-227.59 267.13,-234.88 265.67,-234.22"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="266.59,-230.24 270.23,-231.89"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="269.31,-235.87 272.61,-228.58 274.07,-229.24 270.77,-236.53 269.31,-235.87"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="270.23,-231.89 273.88,-233.54"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="303.98,-247.17 309.78,-253.75 307.96,-248.97 310.93,-250.32 310.93,-250.32 310.93,-250.32 307.96,-248.97 312.75,-247.19 303.98,-247.17"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="299.34" cy="-245.07" rx="3.2" ry="3.2"/>
+</g>
+<!-- idempotency_requests -->
+<g id="node7" class="node">
+<title>idempotency_requests</title>
+<polygon fill="none" stroke="black" points="303.79,-60.4 303.79,-190.4 457.4,-190.4 457.4,-60.4 303.79,-60.4"/>
+<polygon fill="#dddddd" stroke="none" points="304.79,-163.8 304.79,-189.4 456.4,-189.4 456.4,-163.8 304.79,-163.8"/>
+<text xml:space="preserve" text-anchor="start" x="309.79" y="-173.7" font-family="Arial" font-weight="bold" font-size="13.00">idempotency_requests</text>
+<text xml:space="preserve" text-anchor="start" x="309.79" y="-145.8" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="434.06" y="-145.8" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="309.79" y="-120.2" font-family="Arial" font-size="13.00">tenant_id</text>
+<text xml:space="preserve" text-anchor="start" x="434.79" y="-120.2" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="309.79" y="-94.6" font-family="Arial" font-size="13.00">actor_id</text>
+<text xml:space="preserve" text-anchor="start" x="434.79" y="-94.6" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="309.79" y="-69" font-family="Arial" font-size="13.00">result_resource_id</text>
+<text xml:space="preserve" text-anchor="start" x="434.79" y="-69" font-family="Arial" font-size="13.00">FK</text>
+</g>
+<!-- appointments&#45;&gt;idempotency_requests -->
+<g id="edge6" class="edge">
+<title>appointments&#45;&gt;idempotency_requests</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M273.74,-173.32C279.02,-170.93 284.39,-168.5 289.79,-166.05"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="268.97,-179.87 265.67,-172.58 267.13,-171.92 270.43,-179.21 268.97,-179.87"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="266.59,-176.56 270.23,-174.91"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="272.61,-178.22 269.31,-170.93 270.77,-170.27 274.07,-177.56 272.61,-178.22"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="270.23,-174.91 273.88,-173.26"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="296.44,-163.05 305.21,-163.03 300.42,-161.24 303.39,-159.9 303.39,-159.9 303.39,-159.9 300.42,-161.24 302.24,-156.47 296.44,-163.05"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="291.8" cy="-165.14" rx="3.2" ry="3.2"/>
+</g>
+<!-- patient_profiles -->
+<g id="node2" class="node">
+<title>patient_profiles</title>
+<polygon fill="none" stroke="black" points="0,-340.2 0,-444.6 108.8,-444.6 108.8,-340.2 0,-340.2"/>
+<polygon fill="#dddddd" stroke="none" points="1,-418 1,-443.6 107.8,-443.6 107.8,-418 1,-418"/>
+<text xml:space="preserve" text-anchor="start" x="6" y="-427.9" font-family="Arial" font-weight="bold" font-size="13.00">patient_profiles</text>
+<text xml:space="preserve" text-anchor="start" x="6" y="-400" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="85.45" y="-400" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="6" y="-374.4" font-family="Arial" font-size="13.00">tenant_id</text>
+<text xml:space="preserve" text-anchor="start" x="86.18" y="-374.4" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="6" y="-348.8" font-family="Arial" font-size="13.00">user_id ?</text>
+<text xml:space="preserve" text-anchor="start" x="86.18" y="-348.8" font-family="Arial" font-size="13.00">FK</text>
+</g>
+<!-- patient_profiles&#45;&gt;appointments -->
+<g id="edge3" class="edge">
+<title>patient_profiles&#45;&gt;appointments</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M103.22,-334.19C106.65,-330.01 108.8,-327.4 108.8,-327.4 108.8,-327.4 120.69,-312.12 136.12,-292.29"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="101.84,-342.16 95.66,-337.08 96.68,-335.85 102.86,-340.93 101.84,-342.16"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="98.25,-340.24 100.78,-337.15"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="104.38,-339.07 98.2,-333.99 99.22,-332.76 105.4,-337.84 104.38,-339.07"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="100.78,-337.15 103.32,-334.06"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="140.69,-286.42 148.44,-282.31 143.37,-282.97 145.38,-280.39 145.38,-280.39 145.38,-280.39 143.37,-282.97 142.76,-277.89 140.69,-286.42"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="137.56" cy="-290.43" rx="3.2" ry="3.2"/>
+</g>
+<!-- practitioners -->
+<g id="node3" class="node">
+<title>practitioners</title>
+<polygon fill="none" stroke="black" points="7.98,-210.2 7.98,-314.6 100.81,-314.6 100.81,-210.2 7.98,-210.2"/>
+<polygon fill="#dddddd" stroke="none" points="8.98,-288 8.98,-313.6 99.81,-313.6 99.81,-288 8.98,-288"/>
+<text xml:space="preserve" text-anchor="start" x="15.03" y="-297.9" font-family="Arial" font-weight="bold" font-size="13.00">practitioners</text>
+<text xml:space="preserve" text-anchor="start" x="13.98" y="-270" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="77.47" y="-270" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="13.98" y="-244.4" font-family="Arial" font-size="13.00">tenant_id</text>
+<text xml:space="preserve" text-anchor="start" x="78.2" y="-244.4" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="13.98" y="-218.8" font-family="Arial" font-size="13.00">user_id</text>
+<text xml:space="preserve" text-anchor="start" x="78.2" y="-218.8" font-family="Arial" font-size="13.00">FK</text>
+</g>
+<!-- practitioners&#45;&gt;appointments -->
+<g id="edge4" class="edge">
+<title>practitioners&#45;&gt;appointments</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M107.9,-241.73C115.49,-238.75 123.41,-235.63 131.32,-232.52"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="102.99,-247.97 100.06,-240.52 101.55,-239.94 104.48,-247.38 102.99,-247.97"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="100.78,-244.54 104.5,-243.07"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="106.71,-246.5 103.78,-239.06 105.27,-238.47 108.2,-245.92 106.71,-246.5"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="104.5,-243.07 108.22,-241.61"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="138.15,-229.83 146.91,-230.25 142.22,-228.23 145.25,-227.03 145.25,-227.03 145.25,-227.03 142.22,-228.23 144.28,-223.55 138.15,-229.83"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="133.41" cy="-231.69" rx="3.2" ry="3.2"/>
+</g>
+<!-- services -->
+<g id="node4" class="node">
+<title>services</title>
+<polygon fill="none" stroke="black" points="7.98,-105 7.98,-183.8 100.81,-183.8 100.81,-105 7.98,-105"/>
+<polygon fill="#dddddd" stroke="none" points="8.98,-157.2 8.98,-182.8 99.81,-182.8 99.81,-157.2 8.98,-157.2"/>
+<text xml:space="preserve" text-anchor="start" x="28.37" y="-167.1" font-family="Arial" font-weight="bold" font-size="13.00">services</text>
+<text xml:space="preserve" text-anchor="start" x="13.98" y="-139.2" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="77.47" y="-139.2" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="13.98" y="-113.6" font-family="Arial" font-size="13.00">tenant_id</text>
+<text xml:space="preserve" text-anchor="start" x="78.2" y="-113.6" font-family="Arial" font-size="13.00">FK</text>
+</g>
+<!-- services&#45;&gt;appointments -->
+<g id="edge5" class="edge">
+<title>services&#45;&gt;appointments</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M107.9,-165.07C115.49,-168.05 123.41,-171.17 131.32,-174.28"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="100.06,-166.28 102.99,-158.83 104.48,-159.42 101.55,-166.86 100.06,-166.28"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="100.78,-162.26 104.5,-163.73"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="103.78,-167.74 106.71,-160.3 108.2,-160.88 105.27,-168.33 103.78,-167.74"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="104.5,-163.73 108.22,-165.19"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="138.15,-176.97 144.28,-183.25 142.22,-178.57 145.25,-179.77 145.25,-179.77 145.25,-179.77 142.22,-178.57 146.91,-176.55 138.15,-176.97"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="133.41" cy="-175.11" rx="3.2" ry="3.2"/>
+</g>
+<!-- operatories -->
+<g id="node5" class="node">
+<title>operatories</title>
+<polygon fill="none" stroke="black" points="7.98,0 7.98,-78.8 100.81,-78.8 100.81,0 7.98,0"/>
+<polygon fill="#dddddd" stroke="none" points="8.98,-52.2 8.98,-77.8 99.81,-77.8 99.81,-52.2 8.98,-52.2"/>
+<text xml:space="preserve" text-anchor="start" x="19" y="-62.1" font-family="Arial" font-weight="bold" font-size="13.00">operatories</text>
+<text xml:space="preserve" text-anchor="start" x="13.98" y="-34.2" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="77.47" y="-34.2" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="13.98" y="-8.6" font-family="Arial" font-size="13.00">tenant_id</text>
+<text xml:space="preserve" text-anchor="start" x="78.2" y="-8.6" font-family="Arial" font-size="13.00">FK</text>
+</g>
+<!-- operatories&#45;&gt;appointments -->
+<g id="edge2" class="edge">
+<title>operatories&#45;&gt;appointments</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M100.51,-84.18C105.48,-89.11 108.8,-92.4 108.8,-92.4 108.8,-92.4 120.35,-105.69 135.47,-123.08"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="92.79,-82.15 98.43,-76.48 99.57,-77.6 93.93,-83.28 92.79,-82.15"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="95.04,-78.75 97.88,-81.57"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="95.63,-84.97 101.27,-79.29 102.4,-80.42 96.77,-86.1 95.63,-84.97"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="97.88,-81.57 100.72,-84.39"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="140.34,-128.68 142.87,-137.08 143.2,-131.98 145.35,-134.44 145.35,-134.44 145.35,-134.44 143.2,-131.98 148.3,-132.36 140.34,-128.68"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="137" cy="-124.84" rx="3.2" ry="3.2"/>
+</g>
+</g>
+</svg><text x="32" y="675" class="small" text-anchor="start">Key projection: full types, attributes and every composite FK are in the dictionary.</text><text x="32" y="699" class="small" text-anchor="start">PK = primary key; FK = foreign key; ? = nullable; circle = optional; crow = many.</text><text x="32" y="723" class="small" text-anchor="start">Tenant ownership edges outside this module are omitted; no relationship is inferred.</text></svg>

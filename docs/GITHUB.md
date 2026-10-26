@@ -7,7 +7,7 @@ The prepared local repository uses branch `main` and remote `origin`. The source
 After reviewing the local commit, upload it with:
 
 ```sh
-git push -u origin main
+git push origin main feature/profile-management feature/operational-reports feature/cms-integration
 ```
 
 Authenticate using your own GitHub credentials or credential manager when prompted. No credentials belong in the remote URL or in committed files. If somebody adds commits to the remote before this first push, fetch and reconcile that history; do not force-push over it.
@@ -15,3 +15,5 @@ Authenticate using your own GitHub credentials or credential manager when prompt
 GitHub Actions runs PHP 8.4 integration checks against disposable PostgreSQL 16 and Redis services on pushes and pull requests. The workflow's static test key and passwords are synthetic CI fixtures, not deployment credentials. Hosting and deployment are separate from uploading this repository.
 
 For a new clone, follow the main README's clone-and-run instructions. `.runtime/`, `vendor/`, `node_modules/`, `.env`, and database contents are deliberately absent from source control.
+
+The original application was already uploaded by the student. The later course alignment is prepared locally, with three two-commit feature branches merged into main. See [Git lab evidence and remaining steps](coursework/GIT_LAB_EVIDENCE.md) for actual commits, the prescribed repository-name requirement, upload status and the pending instructor username.

@@ -1,0 +1,4347 @@
+{
+  "source": "pg_dump --schema-only --no-owner --no-privileges; PostgreSQL 16.15; local smilesuite; 2026-10-27",
+  "tables": [
+    {
+      "name": "appointment_events",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.appointment_events_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "appointment_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "actor_id",
+          "type": "bigint",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "prior_state",
+          "type": "character varying(32)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "new_state",
+          "type": "character varying(32)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "reason",
+          "type": "character varying(255)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "occurred_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "version",
+          "type": "integer",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "appointment_events_pkey PRIMARY KEY (id)",
+        "appointment_events_tenant_id_appointment_id_version_key UNIQUE (tenant_id, appointment_id, version)",
+        "appointment_events_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "appointment_events_tenant_id_actor_id_fkey FOREIGN KEY (tenant_id, actor_id) REFERENCES public.users(tenant_id, id) ON DELETE RESTRICT",
+        "appointment_events_tenant_id_appointment_id_fkey FOREIGN KEY (tenant_id, appointment_id) REFERENCES public.appointments(tenant_id, id) ON DELETE RESTRICT",
+        "appointment_events_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "appointment_id",
+          "version"
+        ],
+        [
+          "tenant_id",
+          "id"
+        ]
+      ]
+    },
+    {
+      "name": "appointments",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.appointments_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "public_code",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "patient_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "practitioner_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "service_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "operatory_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "start_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "end_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "occupied_start_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "occupied_end_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "character varying(32)",
+          "nullable": false,
+          "default": "'scheduled'::character varying"
+        },
+        {
+          "name": "price_minor",
+          "type": "integer",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "currency",
+          "type": "character(3)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "duration_minutes",
+          "type": "smallint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "buffer_before_minutes",
+          "type": "smallint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "buffer_after_minutes",
+          "type": "smallint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "timezone",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "version",
+          "type": "integer",
+          "nullable": false,
+          "default": "1"
+        },
+        {
+          "name": "payment_method",
+          "type": "character varying(32)",
+          "nullable": false,
+          "default": "'pay_at_clinic'::character varying"
+        },
+        {
+          "name": "checked_in_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "in_chair_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "completed_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "CONSTRAINT appointments_buffer_after_minutes_check CHECK ((buffer_after_minutes >= 0))",
+        "CONSTRAINT appointments_buffer_before_minutes_check CHECK ((buffer_before_minutes >= 0))",
+        "CONSTRAINT appointments_check CHECK (((occupied_start_at <= start_at) AND (start_at < end_at) AND (end_at <= occupied_end_at)))",
+        "CONSTRAINT appointments_currency_check CHECK ((currency ~ '^[A-Z]{3}$'::text))",
+        "CONSTRAINT appointments_duration_minutes_check CHECK ((duration_minutes > 0))",
+        "CONSTRAINT appointments_payment_method_check CHECK (((payment_method)::text = 'pay_at_clinic'::text))",
+        "CONSTRAINT appointments_price_minor_check CHECK ((price_minor >= 0))",
+        "CONSTRAINT appointments_status_check CHECK (((status)::text = ANY ((ARRAY['scheduled'::character varying, 'confirmed'::character varying, 'checked_in'::character varying, 'in_chair'::character varying, 'completed'::character varying, 'no_show'::character varying, 'cancelled'::character varying])::text[])))",
+        "CONSTRAINT appointments_version_check CHECK ((version > 0))",
+        "appointments_operatory_no_overlap EXCLUDE USING gist (tenant_id WITH =, operatory_id WITH =, tstzrange(occupied_start_at, occupied_end_at, '[)'::text) WITH &&) WHERE (((status)::text <> 'cancelled'::text))",
+        "appointments_pkey PRIMARY KEY (id)",
+        "appointments_practitioner_no_overlap EXCLUDE USING gist (tenant_id WITH =, practitioner_id WITH =, tstzrange(occupied_start_at, occupied_end_at, '[)'::text) WITH &&) WHERE (((status)::text <> 'cancelled'::text))",
+        "appointments_public_code_key UNIQUE (public_code)",
+        "appointments_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "appointments_tenant_id_id_patient_id_key UNIQUE (tenant_id, id, patient_id)",
+        "appointments_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)",
+        "appointments_tenant_id_operatory_id_fkey FOREIGN KEY (tenant_id, operatory_id) REFERENCES public.operatories(tenant_id, id) ON DELETE RESTRICT",
+        "appointments_tenant_id_patient_id_fkey FOREIGN KEY (tenant_id, patient_id) REFERENCES public.patient_profiles(tenant_id, id) ON DELETE RESTRICT",
+        "appointments_tenant_id_practitioner_id_fkey FOREIGN KEY (tenant_id, practitioner_id) REFERENCES public.practitioners(tenant_id, id) ON DELETE RESTRICT",
+        "appointments_tenant_id_service_id_fkey FOREIGN KEY (tenant_id, service_id) REFERENCES public.services(tenant_id, id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "public_code"
+        ],
+        [
+          "tenant_id",
+          "id"
+        ],
+        [
+          "tenant_id",
+          "id",
+          "patient_id"
+        ]
+      ]
+    },
+    {
+      "name": "audit_events",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.audit_events_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "actor_id",
+          "type": "bigint",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "action",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "resource_type",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "resource_id",
+          "type": "bigint",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "metadata",
+          "type": "jsonb",
+          "nullable": false,
+          "default": "'{}'::jsonb"
+        },
+        {
+          "name": "occurred_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "audit_events_pkey PRIMARY KEY (id)",
+        "audit_events_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "audit_events_tenant_id_actor_id_fkey FOREIGN KEY (tenant_id, actor_id) REFERENCES public.users(tenant_id, id) ON DELETE RESTRICT",
+        "audit_events_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "id"
+        ]
+      ]
+    },
+    {
+      "name": "billing_checkout_sessions",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.billing_checkout_sessions_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "generation",
+          "type": "integer",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "price_id",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "success_url",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "cancel_url",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "provider_session_id",
+          "type": "character varying(255)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "checkout_url",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "expires_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "billing_checkout_sessions_pkey PRIMARY KEY (id)",
+        "billing_checkout_sessions_provider_session_id_unique UNIQUE (provider_session_id)",
+        "billing_checkout_sessions_tenant_id_unique UNIQUE (tenant_id)",
+        "billing_checkout_sessions_tenant_id_foreign FOREIGN KEY (tenant_id) REFERENCES public.tenants(id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "provider_session_id"
+        ],
+        [
+          "tenant_id"
+        ]
+      ]
+    },
+    {
+      "name": "billing_entitlements",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.billing_entitlements_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "tier",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": "'none'::character varying"
+        },
+        {
+          "name": "bookings_enabled",
+          "type": "boolean",
+          "nullable": false,
+          "default": "false"
+        },
+        {
+          "name": "chair_limit",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "practitioner_limit",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "past_due_since",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grace_until",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "over_limit",
+          "type": "boolean",
+          "nullable": false,
+          "default": "false"
+        },
+        {
+          "name": "reconciled_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "billing_entitlements_pkey PRIMARY KEY (id)",
+        "billing_entitlements_tenant_id_unique UNIQUE (tenant_id)",
+        "billing_entitlements_tenant_id_foreign FOREIGN KEY (tenant_id) REFERENCES public.tenants(id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id"
+        ]
+      ]
+    },
+    {
+      "name": "cache",
+      "columns": [
+        {
+          "name": "key",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "value",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "expiration",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "cache_pkey PRIMARY KEY (key)"
+      ],
+      "primaryKey": [
+        "key"
+      ],
+      "uniqueKeys": []
+    },
+    {
+      "name": "cache_locks",
+      "columns": [
+        {
+          "name": "key",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "owner",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "expiration",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "cache_locks_pkey PRIMARY KEY (key)"
+      ],
+      "primaryKey": [
+        "key"
+      ],
+      "uniqueKeys": []
+    },
+    {
+      "name": "care_assignments",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.care_assignments_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "patient_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "practitioner_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "appointment_id",
+          "type": "bigint",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "granted_by",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "valid_from",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "valid_to",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "revoked_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "purpose",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "CONSTRAINT care_assignments_check CHECK (((valid_to IS NULL) OR (valid_from < valid_to)))",
+        "care_assignments_pkey PRIMARY KEY (id)",
+        "care_assignments_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "care_assignments_tenant_id_appointment_id_patient_id_fkey FOREIGN KEY (tenant_id, appointment_id, patient_id) REFERENCES public.appointments(tenant_id, id, patient_id) ON DELETE RESTRICT",
+        "care_assignments_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)",
+        "care_assignments_tenant_id_granted_by_fkey FOREIGN KEY (tenant_id, granted_by) REFERENCES public.users(tenant_id, id) ON DELETE RESTRICT",
+        "care_assignments_tenant_id_patient_id_fkey FOREIGN KEY (tenant_id, patient_id) REFERENCES public.patient_profiles(tenant_id, id) ON DELETE RESTRICT",
+        "care_assignments_tenant_id_practitioner_id_fkey FOREIGN KEY (tenant_id, practitioner_id) REFERENCES public.practitioners(tenant_id, id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "id"
+        ]
+      ]
+    },
+    {
+      "name": "clinic_hours",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.clinic_hours_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "weekday",
+          "type": "smallint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "local_start",
+          "type": "time without time zone",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "local_end",
+          "type": "time without time zone",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "effective_from",
+          "type": "date",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "effective_to",
+          "type": "date",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "CONSTRAINT clinic_hours_check CHECK ((local_start < local_end))",
+        "CONSTRAINT clinic_hours_check1 CHECK (((effective_to IS NULL) OR (effective_from IS NULL) OR (effective_from <= effective_to)))",
+        "CONSTRAINT clinic_hours_weekday_check CHECK (((weekday >= 1) AND (weekday <= 7)))",
+        "clinic_hours_pkey PRIMARY KEY (id)",
+        "clinic_hours_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "clinic_hours_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "id"
+        ]
+      ]
+    },
+    {
+      "name": "clinical_notes",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.clinical_notes_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "patient_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "appointment_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "practitioner_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "content",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "note_version",
+          "type": "integer",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "signed_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "supersedes_id",
+          "type": "bigint",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "CONSTRAINT clinical_notes_note_version_check CHECK ((note_version > 0))",
+        "clinical_notes_pkey PRIMARY KEY (id)",
+        "clinical_notes_tenant_id_appointment_id_note_version_key UNIQUE (tenant_id, appointment_id, note_version)",
+        "clinical_notes_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "clinical_notes_tenant_id_id_patient_id_key UNIQUE (tenant_id, id, patient_id)",
+        "clinical_notes_tenant_id_appointment_id_patient_id_fkey FOREIGN KEY (tenant_id, appointment_id, patient_id) REFERENCES public.appointments(tenant_id, id, patient_id) ON DELETE RESTRICT",
+        "clinical_notes_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)",
+        "clinical_notes_tenant_id_patient_id_fkey FOREIGN KEY (tenant_id, patient_id) REFERENCES public.patient_profiles(tenant_id, id) ON DELETE RESTRICT",
+        "clinical_notes_tenant_id_practitioner_id_fkey FOREIGN KEY (tenant_id, practitioner_id) REFERENCES public.practitioners(tenant_id, id) ON DELETE RESTRICT",
+        "clinical_notes_tenant_id_supersedes_id_patient_id_fkey FOREIGN KEY (tenant_id, supersedes_id, patient_id) REFERENCES public.clinical_notes(tenant_id, id, patient_id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "appointment_id",
+          "note_version"
+        ],
+        [
+          "tenant_id",
+          "id"
+        ],
+        [
+          "tenant_id",
+          "id",
+          "patient_id"
+        ]
+      ]
+    },
+    {
+      "name": "consent_records",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.consent_records_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "patient_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "user_id",
+          "type": "bigint",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "purpose",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "notice_version",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "granted_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "withdrawn_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "capture_method",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "consent_records_pkey PRIMARY KEY (id)",
+        "consent_records_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "consent_records_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)",
+        "consent_records_tenant_id_patient_id_fkey FOREIGN KEY (tenant_id, patient_id) REFERENCES public.patient_profiles(tenant_id, id) ON DELETE RESTRICT",
+        "consent_records_tenant_id_user_id_fkey FOREIGN KEY (tenant_id, user_id) REFERENCES public.users(tenant_id, id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "id"
+        ]
+      ]
+    },
+    {
+      "name": "failed_jobs",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.failed_jobs_id_seq'::regclass)"
+        },
+        {
+          "name": "uuid",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "connection",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "queue",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "payload",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "exception",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "failed_at",
+          "type": "timestamp(0) without time zone",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "constraints": [
+        "failed_jobs_pkey PRIMARY KEY (id)",
+        "failed_jobs_uuid_unique UNIQUE (uuid)"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "uuid"
+        ]
+      ]
+    },
+    {
+      "name": "idempotency_requests",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.idempotency_requests_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "actor_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "operation",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "key_hash",
+          "type": "character varying(64)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "request_hash",
+          "type": "character varying(64)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "result_resource_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "expires_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "idempotency_requests_pkey PRIMARY KEY (id)",
+        "idempotency_requests_tenant_id_actor_id_operation_key_hash_key UNIQUE (tenant_id, actor_id, operation, key_hash)",
+        "idempotency_requests_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "idempotency_requests_tenant_id_actor_id_fkey FOREIGN KEY (tenant_id, actor_id) REFERENCES public.users(tenant_id, id) ON DELETE RESTRICT",
+        "idempotency_requests_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)",
+        "idempotency_requests_tenant_id_result_resource_id_fkey FOREIGN KEY (tenant_id, result_resource_id) REFERENCES public.appointments(tenant_id, id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "actor_id",
+          "operation",
+          "key_hash"
+        ],
+        [
+          "tenant_id",
+          "id"
+        ]
+      ]
+    },
+    {
+      "name": "intake_submissions",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.intake_submissions_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "patient_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "appointment_id",
+          "type": "bigint",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "form_version",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "answers",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "submitted_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "author_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "supersedes_id",
+          "type": "bigint",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "intake_submissions_pkey PRIMARY KEY (id)",
+        "intake_submissions_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "intake_submissions_tenant_id_id_patient_id_key UNIQUE (tenant_id, id, patient_id)",
+        "intake_submissions_tenant_id_appointment_id_patient_id_fkey FOREIGN KEY (tenant_id, appointment_id, patient_id) REFERENCES public.appointments(tenant_id, id, patient_id) ON DELETE RESTRICT",
+        "intake_submissions_tenant_id_author_id_fkey FOREIGN KEY (tenant_id, author_id) REFERENCES public.users(tenant_id, id) ON DELETE RESTRICT",
+        "intake_submissions_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)",
+        "intake_submissions_tenant_id_patient_id_fkey FOREIGN KEY (tenant_id, patient_id) REFERENCES public.patient_profiles(tenant_id, id) ON DELETE RESTRICT",
+        "intake_submissions_tenant_id_supersedes_id_patient_id_fkey FOREIGN KEY (tenant_id, supersedes_id, patient_id) REFERENCES public.intake_submissions(tenant_id, id, patient_id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "id"
+        ],
+        [
+          "tenant_id",
+          "id",
+          "patient_id"
+        ]
+      ]
+    },
+    {
+      "name": "job_batches",
+      "columns": [
+        {
+          "name": "id",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "name",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "total_jobs",
+          "type": "integer",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "pending_jobs",
+          "type": "integer",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "failed_jobs",
+          "type": "integer",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "failed_job_ids",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "options",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "cancelled_at",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "integer",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "finished_at",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "job_batches_pkey PRIMARY KEY (id)"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": []
+    },
+    {
+      "name": "jobs",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.jobs_id_seq'::regclass)"
+        },
+        {
+          "name": "queue",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "payload",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "attempts",
+          "type": "smallint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "reserved_at",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "available_at",
+          "type": "integer",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "integer",
+          "nullable": false,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "jobs_pkey PRIMARY KEY (id)"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": []
+    },
+    {
+      "name": "migrations",
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "nullable": false,
+          "default": "nextval('public.migrations_id_seq'::regclass)"
+        },
+        {
+          "name": "migration",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "batch",
+          "type": "integer",
+          "nullable": false,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "migrations_pkey PRIMARY KEY (id)"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": []
+    },
+    {
+      "name": "notification_deliveries",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.notification_deliveries_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "outbox_message_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "channel",
+          "type": "character varying(32)",
+          "nullable": false,
+          "default": "'email'::character varying"
+        },
+        {
+          "name": "state",
+          "type": "character varying(32)",
+          "nullable": false,
+          "default": "'pending'::character varying"
+        },
+        {
+          "name": "attempts",
+          "type": "integer",
+          "nullable": false,
+          "default": "0"
+        },
+        {
+          "name": "sent_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "last_error_code",
+          "type": "character varying(255)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "notification_deliveries_pkey PRIMARY KEY (id)",
+        "notification_deliveries_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "notification_deliveries_tenant_id_outbox_message_id_channel_key UNIQUE (tenant_id, outbox_message_id, channel)",
+        "notification_deliveries_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)",
+        "notification_deliveries_tenant_id_outbox_message_id_fkey FOREIGN KEY (tenant_id, outbox_message_id) REFERENCES public.outbox_messages(tenant_id, id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "id"
+        ],
+        [
+          "tenant_id",
+          "outbox_message_id",
+          "channel"
+        ]
+      ]
+    },
+    {
+      "name": "operatories",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.operatories_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "name",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "active",
+          "type": "boolean",
+          "nullable": false,
+          "default": "true"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "operatories_pkey PRIMARY KEY (id)",
+        "operatories_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "operatories_tenant_id_name_key UNIQUE (tenant_id, name)",
+        "operatories_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "id"
+        ],
+        [
+          "tenant_id",
+          "name"
+        ]
+      ]
+    },
+    {
+      "name": "operatory_services",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.operatory_services_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "operatory_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "service_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "operatory_services_pkey PRIMARY KEY (id)",
+        "operatory_services_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "operatory_services_tenant_id_operatory_id_service_id_key UNIQUE (tenant_id, operatory_id, service_id)",
+        "operatory_services_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)",
+        "operatory_services_tenant_id_operatory_id_fkey FOREIGN KEY (tenant_id, operatory_id) REFERENCES public.operatories(tenant_id, id) ON DELETE RESTRICT",
+        "operatory_services_tenant_id_service_id_fkey FOREIGN KEY (tenant_id, service_id) REFERENCES public.services(tenant_id, id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "id"
+        ],
+        [
+          "tenant_id",
+          "operatory_id",
+          "service_id"
+        ]
+      ]
+    },
+    {
+      "name": "outbox_messages",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.outbox_messages_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "event_type",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "resource_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "version",
+          "type": "integer",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "deduplication_key",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "state",
+          "type": "character varying(32)",
+          "nullable": false,
+          "default": "'pending'::character varying"
+        },
+        {
+          "name": "attempts",
+          "type": "integer",
+          "nullable": false,
+          "default": "0"
+        },
+        {
+          "name": "available_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "processed_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "last_error_code",
+          "type": "character varying(255)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "outbox_messages_pkey PRIMARY KEY (id)",
+        "outbox_messages_tenant_id_deduplication_key_key UNIQUE (tenant_id, deduplication_key)",
+        "outbox_messages_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "outbox_messages_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)",
+        "outbox_messages_tenant_id_resource_id_fkey FOREIGN KEY (tenant_id, resource_id) REFERENCES public.appointments(tenant_id, id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "deduplication_key"
+        ],
+        [
+          "tenant_id",
+          "id"
+        ]
+      ]
+    },
+    {
+      "name": "password_reset_tokens",
+      "columns": [
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "email",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "token",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "password_reset_tokens_pkey PRIMARY KEY (tenant_id, email)",
+        "password_reset_tokens_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)"
+      ],
+      "primaryKey": [
+        "tenant_id",
+        "email"
+      ],
+      "uniqueKeys": []
+    },
+    {
+      "name": "patient_profiles",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.patient_profiles_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "user_id",
+          "type": "bigint",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "first_name",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "last_name",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "email",
+          "type": "character varying(255)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "phone",
+          "type": "character varying(255)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "date_of_birth",
+          "type": "date",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "character varying(32)",
+          "nullable": false,
+          "default": "'active'::character varying"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "patient_profiles_pkey PRIMARY KEY (id)",
+        "patient_profiles_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "patient_profiles_tenant_id_user_id_key UNIQUE (tenant_id, user_id)",
+        "patient_profiles_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)",
+        "patient_profiles_tenant_id_user_id_fkey FOREIGN KEY (tenant_id, user_id) REFERENCES public.users(tenant_id, id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "id"
+        ],
+        [
+          "tenant_id",
+          "user_id"
+        ]
+      ]
+    },
+    {
+      "name": "platform_admins",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.platform_admins_id_seq'::regclass)"
+        },
+        {
+          "name": "name",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "email",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "password",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "character varying(32)",
+          "nullable": false,
+          "default": "'active'::character varying"
+        },
+        {
+          "name": "two_factor_secret",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "two_factor_recovery_codes",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "two_factor_confirmed_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "remember_token",
+          "type": "character varying(100)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "CONSTRAINT platform_admins_email_check CHECK (((email)::text = lower(TRIM(BOTH FROM email))))",
+        "platform_admins_email_key UNIQUE (email)",
+        "platform_admins_pkey PRIMARY KEY (id)"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "email"
+        ]
+      ]
+    },
+    {
+      "name": "platform_audit_events",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.platform_audit_events_id_seq'::regclass)"
+        },
+        {
+          "name": "platform_admin_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "action",
+          "type": "character varying(64)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "previous_status",
+          "type": "character varying(32)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "new_status",
+          "type": "character varying(32)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "occurred_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": false,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "platform_audit_events_pkey PRIMARY KEY (id)",
+        "platform_audit_events_platform_admin_id_foreign FOREIGN KEY (platform_admin_id) REFERENCES public.platform_admins(id) ON DELETE RESTRICT",
+        "platform_audit_events_tenant_id_foreign FOREIGN KEY (tenant_id) REFERENCES public.tenants(id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": []
+    },
+    {
+      "name": "practitioner_breaks",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.practitioner_breaks_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "practitioner_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "weekday",
+          "type": "smallint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "local_start",
+          "type": "time without time zone",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "local_end",
+          "type": "time without time zone",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "effective_from",
+          "type": "date",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "effective_to",
+          "type": "date",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "CONSTRAINT practitioner_breaks_check CHECK ((local_start < local_end))",
+        "CONSTRAINT practitioner_breaks_check1 CHECK (((effective_to IS NULL) OR (effective_from IS NULL) OR (effective_from <= effective_to)))",
+        "CONSTRAINT practitioner_breaks_weekday_check CHECK (((weekday >= 1) AND (weekday <= 7)))",
+        "practitioner_breaks_pkey PRIMARY KEY (id)",
+        "practitioner_breaks_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "practitioner_breaks_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)",
+        "practitioner_breaks_tenant_id_practitioner_id_fkey FOREIGN KEY (tenant_id, practitioner_id) REFERENCES public.practitioners(tenant_id, id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "id"
+        ]
+      ]
+    },
+    {
+      "name": "practitioner_services",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.practitioner_services_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "practitioner_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "service_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "practitioner_services_pkey PRIMARY KEY (id)",
+        "practitioner_services_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "practitioner_services_tenant_id_practitioner_id_service_id_key UNIQUE (tenant_id, practitioner_id, service_id)",
+        "practitioner_services_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)",
+        "practitioner_services_tenant_id_practitioner_id_fkey FOREIGN KEY (tenant_id, practitioner_id) REFERENCES public.practitioners(tenant_id, id) ON DELETE RESTRICT",
+        "practitioner_services_tenant_id_service_id_fkey FOREIGN KEY (tenant_id, service_id) REFERENCES public.services(tenant_id, id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "id"
+        ],
+        [
+          "tenant_id",
+          "practitioner_id",
+          "service_id"
+        ]
+      ]
+    },
+    {
+      "name": "practitioner_shifts",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.practitioner_shifts_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "practitioner_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "weekday",
+          "type": "smallint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "local_start",
+          "type": "time without time zone",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "local_end",
+          "type": "time without time zone",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "effective_from",
+          "type": "date",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "effective_to",
+          "type": "date",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "CONSTRAINT practitioner_shifts_check CHECK ((local_start < local_end))",
+        "CONSTRAINT practitioner_shifts_check1 CHECK (((effective_to IS NULL) OR (effective_from IS NULL) OR (effective_from <= effective_to)))",
+        "CONSTRAINT practitioner_shifts_weekday_check CHECK (((weekday >= 1) AND (weekday <= 7)))",
+        "practitioner_shifts_pkey PRIMARY KEY (id)",
+        "practitioner_shifts_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "practitioner_shifts_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)",
+        "practitioner_shifts_tenant_id_practitioner_id_fkey FOREIGN KEY (tenant_id, practitioner_id) REFERENCES public.practitioners(tenant_id, id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "id"
+        ]
+      ]
+    },
+    {
+      "name": "practitioners",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.practitioners_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "user_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "display_title",
+          "type": "character varying(255)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "specialization",
+          "type": "character varying(255)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "active",
+          "type": "boolean",
+          "nullable": false,
+          "default": "true"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "practitioners_pkey PRIMARY KEY (id)",
+        "practitioners_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "practitioners_tenant_id_user_id_key UNIQUE (tenant_id, user_id)",
+        "practitioners_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)",
+        "practitioners_tenant_id_user_id_fkey FOREIGN KEY (tenant_id, user_id) REFERENCES public.users(tenant_id, id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "id"
+        ],
+        [
+          "tenant_id",
+          "user_id"
+        ]
+      ]
+    },
+    {
+      "name": "schedule_blocks",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.schedule_blocks_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "resource_type",
+          "type": "character varying(32)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "practitioner_id",
+          "type": "bigint",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "operatory_id",
+          "type": "bigint",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "starts_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "ends_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "reason",
+          "type": "character varying(255)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "CONSTRAINT schedule_blocks_check CHECK ((starts_at < ends_at))",
+        "CONSTRAINT schedule_blocks_check1 CHECK (((((resource_type)::text = 'clinic'::text) AND (practitioner_id IS NULL) AND (operatory_id IS NULL)) OR (((resource_type)::text = 'practitioner'::text) AND (practitioner_id IS NOT NULL) AND (operatory_id IS NULL)) OR (((resource_type)::text = 'operatory'::text) AND (operatory_id IS NOT NULL) AND (practitioner_id IS NULL))))",
+        "schedule_blocks_pkey PRIMARY KEY (id)",
+        "schedule_blocks_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "schedule_blocks_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)",
+        "schedule_blocks_tenant_id_operatory_id_fkey FOREIGN KEY (tenant_id, operatory_id) REFERENCES public.operatories(tenant_id, id) ON DELETE RESTRICT",
+        "schedule_blocks_tenant_id_practitioner_id_fkey FOREIGN KEY (tenant_id, practitioner_id) REFERENCES public.practitioners(tenant_id, id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "id"
+        ]
+      ]
+    },
+    {
+      "name": "services",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.services_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "name",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "category",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "duration_minutes",
+          "type": "smallint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "buffer_before_minutes",
+          "type": "smallint",
+          "nullable": false,
+          "default": "0"
+        },
+        {
+          "name": "buffer_after_minutes",
+          "type": "smallint",
+          "nullable": false,
+          "default": "15"
+        },
+        {
+          "name": "price_minor",
+          "type": "integer",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "currency",
+          "type": "character(3)",
+          "nullable": false,
+          "default": "'PHP'::bpchar"
+        },
+        {
+          "name": "active",
+          "type": "boolean",
+          "nullable": false,
+          "default": "true"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "CONSTRAINT services_buffer_after_minutes_check CHECK (((buffer_after_minutes >= 0) AND (buffer_after_minutes <= 1440)))",
+        "CONSTRAINT services_buffer_before_minutes_check CHECK (((buffer_before_minutes >= 0) AND (buffer_before_minutes <= 1440)))",
+        "CONSTRAINT services_currency_check CHECK ((currency ~ '^[A-Z]{3}$'::text))",
+        "CONSTRAINT services_duration_minutes_check CHECK (((duration_minutes >= 1) AND (duration_minutes <= 1440)))",
+        "CONSTRAINT services_price_minor_check CHECK ((price_minor >= 0))",
+        "services_pkey PRIMARY KEY (id)",
+        "services_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "services_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "id"
+        ]
+      ]
+    },
+    {
+      "name": "sessions",
+      "columns": [
+        {
+          "name": "id",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "user_id",
+          "type": "bigint",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "ip_address",
+          "type": "character varying(45)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "user_agent",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "payload",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "last_activity",
+          "type": "integer",
+          "nullable": false,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "sessions_pkey PRIMARY KEY (id)"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": []
+    },
+    {
+      "name": "shopify_connections",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.shopify_connections_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "shop_host",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "shop_id",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "primary_domain",
+          "type": "character varying(255)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "private_token",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": "'active'::character varying"
+        },
+        {
+          "name": "generation",
+          "type": "integer",
+          "nullable": false,
+          "default": "1"
+        },
+        {
+          "name": "verified_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "shopify_connections_pkey PRIMARY KEY (id)",
+        "shopify_connections_shop_host_unique UNIQUE (shop_host)",
+        "shopify_connections_tenant_id_unique UNIQUE (tenant_id)",
+        "shopify_connections_tenant_id_foreign FOREIGN KEY (tenant_id) REFERENCES public.tenants(id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "shop_host"
+        ],
+        [
+          "tenant_id"
+        ]
+      ]
+    },
+    {
+      "name": "shopping_carts",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.shopping_carts_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "connection_generation",
+          "type": "integer",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "session_hash",
+          "type": "character varying(64)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "shopify_cart_id",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "shopping_carts_pkey PRIMARY KEY (id)",
+        "shopping_carts_tenant_id_session_hash_unique UNIQUE (tenant_id, session_hash)",
+        "shopping_carts_tenant_id_foreign FOREIGN KEY (tenant_id) REFERENCES public.tenants(id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "session_hash"
+        ]
+      ]
+    },
+    {
+      "name": "staff_invitations",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.staff_invitations_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "email",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "roles",
+          "type": "jsonb",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "token_hash",
+          "type": "character varying(64)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "expires_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "accepted_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "invited_by",
+          "type": "bigint",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "CONSTRAINT staff_invitations_email_check CHECK (((email)::text = lower(TRIM(BOTH FROM email))))",
+        "staff_invitations_pkey PRIMARY KEY (id)",
+        "staff_invitations_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "staff_invitations_token_hash_key UNIQUE (token_hash)",
+        "staff_invitations_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)",
+        "staff_invitations_tenant_id_invited_by_fkey FOREIGN KEY (tenant_id, invited_by) REFERENCES public.users(tenant_id, id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "id"
+        ],
+        [
+          "token_hash"
+        ]
+      ]
+    },
+    {
+      "name": "subscription_items",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.subscription_items_id_seq'::regclass)"
+        },
+        {
+          "name": "subscription_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "stripe_id",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "stripe_product",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "stripe_price",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "meter_id",
+          "type": "character varying(255)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "meter_event_name",
+          "type": "character varying(255)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "quantity",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "subscription_items_pkey PRIMARY KEY (id)",
+        "subscription_items_stripe_id_unique UNIQUE (stripe_id)",
+        "subscription_items_subscription_id_foreign FOREIGN KEY (subscription_id) REFERENCES public.subscriptions(id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "stripe_id"
+        ]
+      ]
+    },
+    {
+      "name": "subscriptions",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.subscriptions_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "type",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "stripe_id",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "stripe_status",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "stripe_price",
+          "type": "character varying(255)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "quantity",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "trial_ends_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "ends_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "subscriptions_pkey PRIMARY KEY (id)",
+        "subscriptions_stripe_id_unique UNIQUE (stripe_id)",
+        "subscriptions_tenant_id_foreign FOREIGN KEY (tenant_id) REFERENCES public.tenants(id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "stripe_id"
+        ]
+      ]
+    },
+    {
+      "name": "tenants",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.tenants_id_seq'::regclass)"
+        },
+        {
+          "name": "name",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "subdomain",
+          "type": "character varying(63)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "timezone",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": "'Asia/Manila'::character varying"
+        },
+        {
+          "name": "currency",
+          "type": "character(3)",
+          "nullable": false,
+          "default": "'PHP'::bpchar"
+        },
+        {
+          "name": "lifecycle_status",
+          "type": "character varying(32)",
+          "nullable": false,
+          "default": "'active'::character varying"
+        },
+        {
+          "name": "slot_interval_minutes",
+          "type": "smallint",
+          "nullable": false,
+          "default": "15"
+        },
+        {
+          "name": "booking_horizon_days",
+          "type": "smallint",
+          "nullable": false,
+          "default": "90"
+        },
+        {
+          "name": "minimum_lead_minutes",
+          "type": "integer",
+          "nullable": false,
+          "default": "120"
+        },
+        {
+          "name": "cancellation_window_hours",
+          "type": "smallint",
+          "nullable": false,
+          "default": "24"
+        },
+        {
+          "name": "branding",
+          "type": "jsonb",
+          "nullable": false,
+          "default": "'{}'::jsonb"
+        },
+        {
+          "name": "stripe_id",
+          "type": "character varying(255)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "pm_type",
+          "type": "character varying(255)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "pm_last_four",
+          "type": "character varying(4)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "trial_ends_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "billing_status",
+          "type": "character varying(32)",
+          "nullable": false,
+          "default": "'pending'::character varying"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "CONSTRAINT tenants_booking_horizon_days_check CHECK (((booking_horizon_days >= 1) AND (booking_horizon_days <= 730)))",
+        "CONSTRAINT tenants_cancellation_window_hours_check CHECK ((cancellation_window_hours >= 0))",
+        "CONSTRAINT tenants_currency_check CHECK ((currency ~ '^[A-Z]{3}$'::text))",
+        "CONSTRAINT tenants_lifecycle_status_check CHECK (((lifecycle_status)::text = ANY ((ARRAY['pending'::character varying, 'active'::character varying, 'suspended'::character varying, 'closed'::character varying])::text[])))",
+        "CONSTRAINT tenants_minimum_lead_minutes_check CHECK ((minimum_lead_minutes >= 0))",
+        "CONSTRAINT tenants_slot_interval_minutes_check CHECK (((slot_interval_minutes >= 5) AND (slot_interval_minutes <= 120)))",
+        "CONSTRAINT tenants_subdomain_check CHECK ((((subdomain)::text = lower(TRIM(BOTH FROM subdomain))) AND ((subdomain)::text ~ '^[a-z0-9]([a-z0-9-]*[a-z0-9])?$'::text) AND ((subdomain)::text <> ALL ((ARRAY['www'::character varying, 'admin'::character varying, 'api'::character varying, 'support'::character varying, 'mail'::character varying, 'status'::character varying, 'app'::character varying, 'billing'::character varying])::text[]))))",
+        "tenants_pkey PRIMARY KEY (id)",
+        "tenants_stripe_id_key UNIQUE (stripe_id)",
+        "tenants_subdomain_key UNIQUE (subdomain)"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "stripe_id"
+        ],
+        [
+          "subdomain"
+        ]
+      ]
+    },
+    {
+      "name": "user_roles",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.user_roles_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "user_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "role",
+          "type": "character varying(32)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "CONSTRAINT user_roles_role_check CHECK (((role)::text = ANY ((ARRAY['owner'::character varying, 'practitioner'::character varying, 'receptionist'::character varying, 'patient'::character varying])::text[])))",
+        "user_roles_pkey PRIMARY KEY (id)",
+        "user_roles_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "user_roles_tenant_id_user_id_role_key UNIQUE (tenant_id, user_id, role)",
+        "user_roles_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)",
+        "user_roles_tenant_id_user_id_fkey FOREIGN KEY (tenant_id, user_id) REFERENCES public.users(tenant_id, id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "id"
+        ],
+        [
+          "tenant_id",
+          "user_id",
+          "role"
+        ]
+      ]
+    },
+    {
+      "name": "users",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.users_id_seq'::regclass)"
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "name",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "email",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "password",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "character varying(32)",
+          "nullable": false,
+          "default": "'active'::character varying"
+        },
+        {
+          "name": "email_verified_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "two_factor_secret",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "two_factor_recovery_codes",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "two_factor_confirmed_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "remember_token",
+          "type": "character varying(100)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "CONSTRAINT users_email_check CHECK (((email)::text = lower(TRIM(BOTH FROM email))))",
+        "CONSTRAINT users_status_check CHECK (((status)::text = ANY ((ARRAY['active'::character varying, 'invited'::character varying, 'disabled'::character varying])::text[])))",
+        "users_pkey PRIMARY KEY (id)",
+        "users_tenant_id_email_key UNIQUE (tenant_id, email)",
+        "users_tenant_id_id_key UNIQUE (tenant_id, id)",
+        "users_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id)"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "tenant_id",
+          "email"
+        ],
+        [
+          "tenant_id",
+          "id"
+        ]
+      ]
+    },
+    {
+      "name": "webhook_events",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "default": "nextval('public.webhook_events_id_seq'::regclass)"
+        },
+        {
+          "name": "provider",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "provider_event_id",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "event_type",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "tenant_id",
+          "type": "bigint",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "raw_payload",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "state",
+          "type": "character varying(255)",
+          "nullable": false,
+          "default": "'pending'::character varying"
+        },
+        {
+          "name": "attempts",
+          "type": "integer",
+          "nullable": false,
+          "default": "0"
+        },
+        {
+          "name": "last_error_code",
+          "type": "character varying(255)",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "processed_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "constraints": [
+        "webhook_events_pkey PRIMARY KEY (id)",
+        "webhook_events_provider_provider_event_id_unique UNIQUE (provider, provider_event_id)",
+        "webhook_events_tenant_id_foreign FOREIGN KEY (tenant_id) REFERENCES public.tenants(id) ON DELETE RESTRICT"
+      ],
+      "primaryKey": [
+        "id"
+      ],
+      "uniqueKeys": [
+        [
+          "provider",
+          "provider_event_id"
+        ]
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "name": "appointment_events_tenant_id_actor_id_fkey",
+      "child": "appointment_events",
+      "columns": [
+        "tenant_id",
+        "actor_id"
+      ],
+      "parent": "users",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": true,
+      "uniqueChild": false
+    },
+    {
+      "name": "appointment_events_tenant_id_appointment_id_fkey",
+      "child": "appointment_events",
+      "columns": [
+        "tenant_id",
+        "appointment_id"
+      ],
+      "parent": "appointments",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "appointment_events_tenant_id_fkey",
+      "child": "appointment_events",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "appointments_tenant_id_fkey",
+      "child": "appointments",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "appointments_tenant_id_operatory_id_fkey",
+      "child": "appointments",
+      "columns": [
+        "tenant_id",
+        "operatory_id"
+      ],
+      "parent": "operatories",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "appointments_tenant_id_patient_id_fkey",
+      "child": "appointments",
+      "columns": [
+        "tenant_id",
+        "patient_id"
+      ],
+      "parent": "patient_profiles",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "appointments_tenant_id_practitioner_id_fkey",
+      "child": "appointments",
+      "columns": [
+        "tenant_id",
+        "practitioner_id"
+      ],
+      "parent": "practitioners",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "appointments_tenant_id_service_id_fkey",
+      "child": "appointments",
+      "columns": [
+        "tenant_id",
+        "service_id"
+      ],
+      "parent": "services",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "audit_events_tenant_id_actor_id_fkey",
+      "child": "audit_events",
+      "columns": [
+        "tenant_id",
+        "actor_id"
+      ],
+      "parent": "users",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": true,
+      "uniqueChild": false
+    },
+    {
+      "name": "audit_events_tenant_id_fkey",
+      "child": "audit_events",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "billing_checkout_sessions_tenant_id_foreign",
+      "child": "billing_checkout_sessions",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": true
+    },
+    {
+      "name": "billing_entitlements_tenant_id_foreign",
+      "child": "billing_entitlements",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": true
+    },
+    {
+      "name": "care_assignments_tenant_id_appointment_id_patient_id_fkey",
+      "child": "care_assignments",
+      "columns": [
+        "tenant_id",
+        "appointment_id",
+        "patient_id"
+      ],
+      "parent": "appointments",
+      "references": [
+        "tenant_id",
+        "id",
+        "patient_id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": true,
+      "uniqueChild": false
+    },
+    {
+      "name": "care_assignments_tenant_id_fkey",
+      "child": "care_assignments",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "care_assignments_tenant_id_granted_by_fkey",
+      "child": "care_assignments",
+      "columns": [
+        "tenant_id",
+        "granted_by"
+      ],
+      "parent": "users",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "care_assignments_tenant_id_patient_id_fkey",
+      "child": "care_assignments",
+      "columns": [
+        "tenant_id",
+        "patient_id"
+      ],
+      "parent": "patient_profiles",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "care_assignments_tenant_id_practitioner_id_fkey",
+      "child": "care_assignments",
+      "columns": [
+        "tenant_id",
+        "practitioner_id"
+      ],
+      "parent": "practitioners",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "clinic_hours_tenant_id_fkey",
+      "child": "clinic_hours",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "clinical_notes_tenant_id_appointment_id_patient_id_fkey",
+      "child": "clinical_notes",
+      "columns": [
+        "tenant_id",
+        "appointment_id",
+        "patient_id"
+      ],
+      "parent": "appointments",
+      "references": [
+        "tenant_id",
+        "id",
+        "patient_id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "clinical_notes_tenant_id_fkey",
+      "child": "clinical_notes",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "clinical_notes_tenant_id_patient_id_fkey",
+      "child": "clinical_notes",
+      "columns": [
+        "tenant_id",
+        "patient_id"
+      ],
+      "parent": "patient_profiles",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "clinical_notes_tenant_id_practitioner_id_fkey",
+      "child": "clinical_notes",
+      "columns": [
+        "tenant_id",
+        "practitioner_id"
+      ],
+      "parent": "practitioners",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "clinical_notes_tenant_id_supersedes_id_patient_id_fkey",
+      "child": "clinical_notes",
+      "columns": [
+        "tenant_id",
+        "supersedes_id",
+        "patient_id"
+      ],
+      "parent": "clinical_notes",
+      "references": [
+        "tenant_id",
+        "id",
+        "patient_id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": true,
+      "uniqueChild": false
+    },
+    {
+      "name": "consent_records_tenant_id_fkey",
+      "child": "consent_records",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "consent_records_tenant_id_patient_id_fkey",
+      "child": "consent_records",
+      "columns": [
+        "tenant_id",
+        "patient_id"
+      ],
+      "parent": "patient_profiles",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "consent_records_tenant_id_user_id_fkey",
+      "child": "consent_records",
+      "columns": [
+        "tenant_id",
+        "user_id"
+      ],
+      "parent": "users",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": true,
+      "uniqueChild": false
+    },
+    {
+      "name": "idempotency_requests_tenant_id_actor_id_fkey",
+      "child": "idempotency_requests",
+      "columns": [
+        "tenant_id",
+        "actor_id"
+      ],
+      "parent": "users",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "idempotency_requests_tenant_id_fkey",
+      "child": "idempotency_requests",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "idempotency_requests_tenant_id_result_resource_id_fkey",
+      "child": "idempotency_requests",
+      "columns": [
+        "tenant_id",
+        "result_resource_id"
+      ],
+      "parent": "appointments",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "intake_submissions_tenant_id_appointment_id_patient_id_fkey",
+      "child": "intake_submissions",
+      "columns": [
+        "tenant_id",
+        "appointment_id",
+        "patient_id"
+      ],
+      "parent": "appointments",
+      "references": [
+        "tenant_id",
+        "id",
+        "patient_id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": true,
+      "uniqueChild": false
+    },
+    {
+      "name": "intake_submissions_tenant_id_author_id_fkey",
+      "child": "intake_submissions",
+      "columns": [
+        "tenant_id",
+        "author_id"
+      ],
+      "parent": "users",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "intake_submissions_tenant_id_fkey",
+      "child": "intake_submissions",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "intake_submissions_tenant_id_patient_id_fkey",
+      "child": "intake_submissions",
+      "columns": [
+        "tenant_id",
+        "patient_id"
+      ],
+      "parent": "patient_profiles",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "intake_submissions_tenant_id_supersedes_id_patient_id_fkey",
+      "child": "intake_submissions",
+      "columns": [
+        "tenant_id",
+        "supersedes_id",
+        "patient_id"
+      ],
+      "parent": "intake_submissions",
+      "references": [
+        "tenant_id",
+        "id",
+        "patient_id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": true,
+      "uniqueChild": false
+    },
+    {
+      "name": "notification_deliveries_tenant_id_fkey",
+      "child": "notification_deliveries",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "notification_deliveries_tenant_id_outbox_message_id_fkey",
+      "child": "notification_deliveries",
+      "columns": [
+        "tenant_id",
+        "outbox_message_id"
+      ],
+      "parent": "outbox_messages",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "operatories_tenant_id_fkey",
+      "child": "operatories",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "operatory_services_tenant_id_fkey",
+      "child": "operatory_services",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "operatory_services_tenant_id_operatory_id_fkey",
+      "child": "operatory_services",
+      "columns": [
+        "tenant_id",
+        "operatory_id"
+      ],
+      "parent": "operatories",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "operatory_services_tenant_id_service_id_fkey",
+      "child": "operatory_services",
+      "columns": [
+        "tenant_id",
+        "service_id"
+      ],
+      "parent": "services",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "outbox_messages_tenant_id_fkey",
+      "child": "outbox_messages",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "outbox_messages_tenant_id_resource_id_fkey",
+      "child": "outbox_messages",
+      "columns": [
+        "tenant_id",
+        "resource_id"
+      ],
+      "parent": "appointments",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "password_reset_tokens_tenant_id_fkey",
+      "child": "password_reset_tokens",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "patient_profiles_tenant_id_fkey",
+      "child": "patient_profiles",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "patient_profiles_tenant_id_user_id_fkey",
+      "child": "patient_profiles",
+      "columns": [
+        "tenant_id",
+        "user_id"
+      ],
+      "parent": "users",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": true,
+      "uniqueChild": true
+    },
+    {
+      "name": "platform_audit_events_platform_admin_id_foreign",
+      "child": "platform_audit_events",
+      "columns": [
+        "platform_admin_id"
+      ],
+      "parent": "platform_admins",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "platform_audit_events_tenant_id_foreign",
+      "child": "platform_audit_events",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "practitioner_breaks_tenant_id_fkey",
+      "child": "practitioner_breaks",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "practitioner_breaks_tenant_id_practitioner_id_fkey",
+      "child": "practitioner_breaks",
+      "columns": [
+        "tenant_id",
+        "practitioner_id"
+      ],
+      "parent": "practitioners",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "practitioner_services_tenant_id_fkey",
+      "child": "practitioner_services",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "practitioner_services_tenant_id_practitioner_id_fkey",
+      "child": "practitioner_services",
+      "columns": [
+        "tenant_id",
+        "practitioner_id"
+      ],
+      "parent": "practitioners",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "practitioner_services_tenant_id_service_id_fkey",
+      "child": "practitioner_services",
+      "columns": [
+        "tenant_id",
+        "service_id"
+      ],
+      "parent": "services",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "practitioner_shifts_tenant_id_fkey",
+      "child": "practitioner_shifts",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "practitioner_shifts_tenant_id_practitioner_id_fkey",
+      "child": "practitioner_shifts",
+      "columns": [
+        "tenant_id",
+        "practitioner_id"
+      ],
+      "parent": "practitioners",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "practitioners_tenant_id_fkey",
+      "child": "practitioners",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "practitioners_tenant_id_user_id_fkey",
+      "child": "practitioners",
+      "columns": [
+        "tenant_id",
+        "user_id"
+      ],
+      "parent": "users",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": true
+    },
+    {
+      "name": "schedule_blocks_tenant_id_fkey",
+      "child": "schedule_blocks",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "schedule_blocks_tenant_id_operatory_id_fkey",
+      "child": "schedule_blocks",
+      "columns": [
+        "tenant_id",
+        "operatory_id"
+      ],
+      "parent": "operatories",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": true,
+      "uniqueChild": false
+    },
+    {
+      "name": "schedule_blocks_tenant_id_practitioner_id_fkey",
+      "child": "schedule_blocks",
+      "columns": [
+        "tenant_id",
+        "practitioner_id"
+      ],
+      "parent": "practitioners",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": true,
+      "uniqueChild": false
+    },
+    {
+      "name": "services_tenant_id_fkey",
+      "child": "services",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "shopify_connections_tenant_id_foreign",
+      "child": "shopify_connections",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": true
+    },
+    {
+      "name": "shopping_carts_tenant_id_foreign",
+      "child": "shopping_carts",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "staff_invitations_tenant_id_fkey",
+      "child": "staff_invitations",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "staff_invitations_tenant_id_invited_by_fkey",
+      "child": "staff_invitations",
+      "columns": [
+        "tenant_id",
+        "invited_by"
+      ],
+      "parent": "users",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": true,
+      "uniqueChild": false
+    },
+    {
+      "name": "subscription_items_subscription_id_foreign",
+      "child": "subscription_items",
+      "columns": [
+        "subscription_id"
+      ],
+      "parent": "subscriptions",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "subscriptions_tenant_id_foreign",
+      "child": "subscriptions",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "user_roles_tenant_id_fkey",
+      "child": "user_roles",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "user_roles_tenant_id_user_id_fkey",
+      "child": "user_roles",
+      "columns": [
+        "tenant_id",
+        "user_id"
+      ],
+      "parent": "users",
+      "references": [
+        "tenant_id",
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "users_tenant_id_fkey",
+      "child": "users",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "NO ACTION",
+      "optionalParent": false,
+      "uniqueChild": false
+    },
+    {
+      "name": "webhook_events_tenant_id_foreign",
+      "child": "webhook_events",
+      "columns": [
+        "tenant_id"
+      ],
+      "parent": "tenants",
+      "references": [
+        "id"
+      ],
+      "deleteRule": "ON DELETE RESTRICT",
+      "optionalParent": true,
+      "uniqueChild": false
+    }
+  ]
+}

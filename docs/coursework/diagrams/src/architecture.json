@@ -1,0 +1,89 @@
+{
+  "components": [
+    {
+      "id": "browser",
+      "name": "Browser",
+      "technology": "Blade / Tailwind / Alpine"
+    },
+    {
+      "id": "laravel",
+      "name": "Laravel application",
+      "technology": "Laravel 13 / PHP 8.4"
+    },
+    {
+      "id": "db",
+      "name": "Application database",
+      "technology": "PostgreSQL 16.15; smilesuite"
+    },
+    {
+      "id": "directus",
+      "name": "CMS API and editor",
+      "technology": "Directus 11.17.4"
+    },
+    {
+      "id": "cmsdb",
+      "name": "CMS database",
+      "technology": "Separate PostgreSQL database"
+    },
+    {
+      "id": "worker",
+      "name": "Queue / outbox worker",
+      "technology": "Laravel; database queue locally"
+    },
+    {
+      "id": "providers",
+      "name": "External providers",
+      "technology": "Stripe / Shopify / mail"
+    }
+  ],
+  "connections": [
+    [
+      "browser",
+      "laravel",
+      "HTTP locally; HTTPS deployment",
+      "Pages / forms / JSON"
+    ],
+    [
+      "laravel",
+      "db",
+      "PDO PostgreSQL",
+      "Tenant records"
+    ],
+    [
+      "laravel",
+      "directus",
+      "Server HTTP API",
+      "Tenant-scoped token / published content / safe projections"
+    ],
+    [
+      "directus",
+      "cmsdb",
+      "PostgreSQL",
+      "Five content/projection collections"
+    ],
+    [
+      "laravel",
+      "worker",
+      "Database queue",
+      "IDs / outbox work"
+    ],
+    [
+      "worker",
+      "db",
+      "PDO PostgreSQL",
+      "Outbox / delivery state"
+    ],
+    [
+      "laravel",
+      "providers",
+      "HTTPS",
+      "Billing / storefront contracts"
+    ],
+    [
+      "worker",
+      "providers",
+      "Configured mail transport",
+      "Minimal notices"
+    ]
+  ]
+}

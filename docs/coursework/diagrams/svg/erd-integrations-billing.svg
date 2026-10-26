@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="864" height="760" viewBox="0 0 864 760" role="img" aria-label="ERD · Subscription and provider inbox"><rect width="864" height="760" fill="white"/><style>text{font-family:Arial,sans-serif;fill:#222} .small{font-size:13px} .body{font-size:16px} .heading{font-size:25px;font-weight:700} .line{fill:none;stroke:#444;stroke-width:1.6}</style><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="none" stroke="#444" stroke-width="1.2"/></marker></defs><text x="32" y="40" class="heading">ERD · Subscription and provider inbox</text><text x="32" y="65" class="small">PostgreSQL 16.15 · crow’s foot · physical keys; module projection</text><svg x="32" y="92" width="800" height="550" viewBox="0 0 503 525"><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(8.64 516.84)">
+<title>G</title>
+<polygon fill="white" stroke="none" points="-8.64,8.64 -8.64,-516.84 494.22,-516.84 494.22,8.64 -8.64,8.64"/>
+<!-- tenants -->
+<g id="node1" class="node">
+<title>tenants</title>
+<polygon fill="none" stroke="black" points="0,-208 0,-312.4 102.94,-312.4 102.94,-208 0,-208"/>
+<polygon fill="#dddddd" stroke="none" points="1,-285.8 1,-311.4 101.94,-311.4 101.94,-285.8 1,-285.8"/>
+<text xml:space="preserve" text-anchor="start" x="28.35" y="-295.7" font-family="Arial" font-weight="bold" font-size="13.00">tenants</text>
+<text xml:space="preserve" text-anchor="start" x="6" y="-267.8" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="79.6" y="-267.8" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="6" y="-242.2" font-family="Arial" font-size="13.00">subdomain</text>
+<text xml:space="preserve" text-anchor="start" x="6" y="-216.6" font-family="Arial" font-size="13.00">timezone</text>
+</g>
+<!-- subscriptions -->
+<g id="node2" class="node">
+<title>subscriptions</title>
+<polygon fill="none" stroke="black" points="180.04,-391 180.04,-495.4 277.28,-495.4 277.28,-391 180.04,-391"/>
+<polygon fill="#dddddd" stroke="none" points="181.04,-468.8 181.04,-494.4 276.28,-494.4 276.28,-468.8 181.04,-468.8"/>
+<text xml:space="preserve" text-anchor="start" x="186.04" y="-478.7" font-family="Arial" font-weight="bold" font-size="13.00">subscriptions</text>
+<text xml:space="preserve" text-anchor="start" x="186.04" y="-450.8" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="253.94" y="-450.8" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="186.04" y="-425.2" font-family="Arial" font-size="13.00">tenant_id</text>
+<text xml:space="preserve" text-anchor="start" x="254.67" y="-425.2" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="186.04" y="-399.6" font-family="Arial" font-size="13.00">stripe_id</text>
+</g>
+<!-- tenants&#45;&gt;subscriptions -->
+<g id="edge4" class="edge">
+<title>tenants&#45;&gt;subscriptions</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M96.02,-318.45C117.95,-347.78 139.94,-377.2 139.94,-377.2 139.94,-377.2 152.14,-386.38 167.44,-397.89"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="88.62,-315.24 95.03,-310.44 95.99,-311.73 89.58,-316.52 88.62,-315.24"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="91.34,-312.2 93.74,-315.4"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="91.01,-318.44 97.42,-313.65 98.38,-314.93 91.97,-319.72 91.01,-318.44"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="93.74,-315.4 96.13,-318.61"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="173.52,-402.46 177.75,-410.15 177.01,-405.09 179.62,-407.05 179.62,-407.05 179.62,-407.05 177.01,-405.09 182.08,-404.4 173.52,-402.46"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="169.45" cy="-399.4" rx="3.2" ry="3.2"/>
+</g>
+<!-- billing_entitlements -->
+<g id="node4" class="node">
+<title>billing_entitlements</title>
+<polygon fill="none" stroke="black" points="161.63,-285.8 161.63,-364.6 295.7,-364.6 295.7,-285.8 161.63,-285.8"/>
+<polygon fill="#dddddd" stroke="none" points="162.63,-338 162.63,-363.6 294.7,-363.6 294.7,-338 162.63,-338"/>
+<text xml:space="preserve" text-anchor="start" x="167.63" y="-347.9" font-family="Arial" font-weight="bold" font-size="13.00">billing_entitlements</text>
+<text xml:space="preserve" text-anchor="start" x="167.63" y="-320" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="272.36" y="-320" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="167.63" y="-294.4" font-family="Arial" font-size="13.00">tenant_id</text>
+<text xml:space="preserve" text-anchor="start" x="273.09" y="-294.4" font-family="Arial" font-size="13.00">FK</text>
+</g>
+<!-- tenants&#45;&gt;billing_entitlements -->
+<g id="edge2" class="edge">
+<title>tenants&#45;&gt;billing_entitlements</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M110.14,-281.6C123.3,-286.48 137.49,-291.74 151.3,-296.87"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="102.03,-282.85 104.81,-275.35 106.31,-275.91 103.53,-283.41 102.03,-282.85"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="102.67,-278.83 106.42,-280.22"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="105.78,-284.25 108.56,-276.75 110.06,-277.3 107.28,-284.8 105.78,-284.25"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="106.42,-280.22 110.17,-281.61"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="162.4,-296.72 159.62,-304.22 158.12,-303.66 160.9,-296.16 162.4,-296.72"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="161.76,-300.75 158.01,-299.36"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="154.49" cy="-298.05" rx="3.2" ry="3.2"/>
+</g>
+<!-- billing_checkout_sessions -->
+<g id="node5" class="node">
+<title>billing_checkout_sessions</title>
+<polygon fill="none" stroke="black" points="139.94,-130.2 139.94,-260.2 317.38,-260.2 317.38,-130.2 139.94,-130.2"/>
+<polygon fill="#dddddd" stroke="none" points="140.94,-233.6 140.94,-259.2 316.38,-259.2 316.38,-233.6 140.94,-233.6"/>
+<text xml:space="preserve" text-anchor="start" x="145.94" y="-243.5" font-family="Arial" font-weight="bold" font-size="13.00">billing_checkout_sessions</text>
+<text xml:space="preserve" text-anchor="start" x="145.94" y="-215.6" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="294.04" y="-215.6" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="145.94" y="-190" font-family="Arial" font-size="13.00">tenant_id</text>
+<text xml:space="preserve" text-anchor="start" x="294.77" y="-190" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="145.94" y="-164.4" font-family="Arial" font-size="13.00">price_id</text>
+<text xml:space="preserve" text-anchor="start" x="145.94" y="-138.8" font-family="Arial" font-size="13.00">provider_session_id ?</text>
+</g>
+<!-- tenants&#45;&gt;billing_checkout_sessions -->
+<g id="edge1" class="edge">
+<title>tenants&#45;&gt;billing_checkout_sessions</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M109.95,-238.87C116.29,-236.52 122.87,-234.08 129.54,-231.6"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="104.81,-245.05 102.03,-237.55 103.53,-236.99 106.31,-244.49 104.81,-245.05"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="102.67,-241.57 106.42,-240.18"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="108.56,-243.65 105.78,-236.15 107.28,-235.6 110.06,-243.1 108.56,-243.65"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="106.42,-240.18 110.17,-238.79"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="137.92,-224.23 140.7,-231.73 139.2,-232.29 136.42,-224.79 137.92,-224.23"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="140.06,-227.7 136.31,-229.09"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="132.8" cy="-230.4" rx="3.2" ry="3.2"/>
+</g>
+<!-- webhook_events -->
+<g id="node6" class="node">
+<title>webhook_events</title>
+<polygon fill="none" stroke="black" points="157.32,0 157.32,-104.4 300.01,-104.4 300.01,0 157.32,0"/>
+<polygon fill="#dddddd" stroke="none" points="158.32,-77.8 158.32,-103.4 299.01,-103.4 299.01,-77.8 158.32,-77.8"/>
+<text xml:space="preserve" text-anchor="start" x="176.28" y="-87.7" font-family="Arial" font-weight="bold" font-size="13.00">webhook_events</text>
+<text xml:space="preserve" text-anchor="start" x="163.32" y="-59.8" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="276.66" y="-59.8" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="163.32" y="-34.2" font-family="Arial" font-size="13.00">provider_event_id</text>
+<text xml:space="preserve" text-anchor="start" x="163.32" y="-8.6" font-family="Arial" font-size="13.00">tenant_id ?</text>
+<text xml:space="preserve" text-anchor="start" x="277.39" y="-8.6" font-family="Arial" font-size="13.00">FK</text>
+</g>
+<!-- tenants&#45;&gt;webhook_events -->
+<g id="edge5" class="edge">
+<title>tenants&#45;&gt;webhook_events</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M90.24,-198.45C113.9,-159.76 139.94,-117.2 139.94,-117.2 139.94,-117.2 141.77,-115.84 144.91,-113.52"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="88.13,-209.57 81.3,-205.4 82.14,-204.03 88.96,-208.21 88.13,-209.57"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="84.3,-208.17 86.38,-204.76"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="88.34" cy="-201.56" rx="3.2" ry="3.2"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="150.97,-109.03 159.54,-107.16 154.48,-106.43 157.1,-104.48 157.1,-104.48 157.1,-104.48 154.48,-106.43 155.25,-101.37 150.97,-109.03"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="146.88" cy="-112.06" rx="3.2" ry="3.2"/>
+</g>
+<!-- subscription_items -->
+<g id="node3" class="node">
+<title>subscription_items</title>
+<polygon fill="none" stroke="black" points="354.38,-378.2 354.38,-508.2 485.58,-508.2 485.58,-378.2 354.38,-378.2"/>
+<polygon fill="#dddddd" stroke="none" points="355.38,-481.6 355.38,-507.2 484.58,-507.2 484.58,-481.6 355.38,-481.6"/>
+<text xml:space="preserve" text-anchor="start" x="360.38" y="-491.5" font-family="Arial" font-weight="bold" font-size="13.00">subscription_items</text>
+<text xml:space="preserve" text-anchor="start" x="360.38" y="-463.6" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="462.24" y="-463.6" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="360.38" y="-438" font-family="Arial" font-size="13.00">subscription_id</text>
+<text xml:space="preserve" text-anchor="start" x="462.97" y="-438" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="360.38" y="-412.4" font-family="Arial" font-size="13.00">stripe_id</text>
+<text xml:space="preserve" text-anchor="start" x="360.38" y="-386.8" font-family="Arial" font-size="13.00">meter_id ?</text>
+</g>
+<!-- subscriptions&#45;&gt;subscription_items -->
+<g id="edge3" class="edge">
+<title>subscriptions&#45;&gt;subscription_items</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M284.81,-443.2C301.68,-443.2 320.58,-443.2 338.75,-443.2"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="277.75,-447.2 277.75,-439.2 279.35,-439.2 279.35,-447.2 277.75,-447.2"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="276.95,-443.2 280.95,-443.2"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="281.75,-447.2 281.75,-439.2 283.35,-439.2 283.35,-447.2 281.75,-447.2"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="280.95,-443.2 284.95,-443.2"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="346.1,-443.2 354.1,-446.8 350.46,-443.2 353.73,-443.2 353.73,-443.2 353.73,-443.2 350.46,-443.2 354.1,-439.6 346.1,-443.2"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="341.01" cy="-443.2" rx="3.2" ry="3.2"/>
+</g>
+</g>
+</svg><text x="32" y="675" class="small" text-anchor="start">Key projection: full types, attributes and every composite FK are in the dictionary.</text><text x="32" y="699" class="small" text-anchor="start">PK = primary key; FK = foreign key; ? = nullable; circle = optional; crow = many.</text><text x="32" y="723" class="small" text-anchor="start">Tenant ownership edges outside this module are omitted; no relationship is inferred.</text></svg>

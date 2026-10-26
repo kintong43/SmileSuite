@@ -1,0 +1,549 @@
+erDiagram
+    appointment_events {
+        bigint id PK
+        bigint tenant_id
+        bigint appointment_id
+        bigint actor_id
+        character_varying_32_ prior_state
+        character_varying_32_ new_state
+        character_varying_255_ reason
+        timestamp_with_time_zone occurred_at
+        integer version
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    appointments {
+        bigint id PK
+        bigint tenant_id
+        character_varying_255_ public_code
+        bigint patient_id
+        bigint practitioner_id
+        bigint service_id
+        bigint operatory_id
+        timestamp_with_time_zone start_at
+        timestamp_with_time_zone end_at
+        timestamp_with_time_zone occupied_start_at
+        timestamp_with_time_zone occupied_end_at
+        character_varying_32_ status
+        integer price_minor
+        character_3_ currency
+        smallint duration_minutes
+        smallint buffer_before_minutes
+        smallint buffer_after_minutes
+        character_varying_255_ timezone
+        integer version
+        character_varying_32_ payment_method
+        timestamp_with_time_zone checked_in_at
+        timestamp_with_time_zone in_chair_at
+        timestamp_with_time_zone completed_at
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    audit_events {
+        bigint id PK
+        bigint tenant_id
+        bigint actor_id
+        character_varying_255_ action
+        character_varying_255_ resource_type
+        bigint resource_id
+        jsonb metadata
+        timestamp_with_time_zone occurred_at
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    billing_checkout_sessions {
+        bigint id PK
+        bigint tenant_id
+        integer generation
+        character_varying_255_ price_id
+        text success_url
+        text cancel_url
+        character_varying_255_ provider_session_id
+        text checkout_url
+        timestamp_0__with_time_zone expires_at
+        timestamp_0__with_time_zone created_at
+        timestamp_0__with_time_zone updated_at
+    }
+    billing_entitlements {
+        bigint id PK
+        bigint tenant_id
+        character_varying_255_ tier
+        boolean bookings_enabled
+        integer chair_limit
+        integer practitioner_limit
+        timestamp_0__with_time_zone past_due_since
+        timestamp_0__with_time_zone grace_until
+        boolean over_limit
+        timestamp_0__with_time_zone reconciled_at
+        timestamp_0__with_time_zone created_at
+        timestamp_0__with_time_zone updated_at
+    }
+    cache {
+        character_varying_255_ key PK
+        text value
+        bigint expiration
+    }
+    cache_locks {
+        character_varying_255_ key PK
+        character_varying_255_ owner
+        bigint expiration
+    }
+    care_assignments {
+        bigint id PK
+        bigint tenant_id
+        bigint patient_id
+        bigint practitioner_id
+        bigint appointment_id
+        bigint granted_by
+        timestamp_with_time_zone valid_from
+        timestamp_with_time_zone valid_to
+        timestamp_with_time_zone revoked_at
+        character_varying_255_ purpose
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    clinic_hours {
+        bigint id PK
+        bigint tenant_id
+        smallint weekday
+        time_without_time_zone local_start
+        time_without_time_zone local_end
+        date effective_from
+        date effective_to
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    clinical_notes {
+        bigint id PK
+        bigint tenant_id
+        bigint patient_id
+        bigint appointment_id
+        bigint practitioner_id
+        text content
+        integer note_version
+        timestamp_with_time_zone signed_at
+        bigint supersedes_id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    consent_records {
+        bigint id PK
+        bigint tenant_id
+        bigint patient_id
+        bigint user_id
+        character_varying_255_ purpose
+        character_varying_255_ notice_version
+        timestamp_with_time_zone granted_at
+        timestamp_with_time_zone withdrawn_at
+        character_varying_255_ capture_method
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    failed_jobs {
+        bigint id PK
+        character_varying_255_ uuid
+        character_varying_255_ connection
+        character_varying_255_ queue
+        text payload
+        text exception
+        timestamp_0__without_time_zone failed_at
+    }
+    idempotency_requests {
+        bigint id PK
+        bigint tenant_id
+        bigint actor_id
+        character_varying_255_ operation
+        character_varying_64_ key_hash
+        character_varying_64_ request_hash
+        bigint result_resource_id
+        timestamp_with_time_zone expires_at
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    intake_submissions {
+        bigint id PK
+        bigint tenant_id
+        bigint patient_id
+        bigint appointment_id
+        character_varying_255_ form_version
+        text answers
+        timestamp_with_time_zone submitted_at
+        bigint author_id
+        bigint supersedes_id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    job_batches {
+        character_varying_255_ id PK
+        character_varying_255_ name
+        integer total_jobs
+        integer pending_jobs
+        integer failed_jobs
+        text failed_job_ids
+        text options
+        integer cancelled_at
+        integer created_at
+        integer finished_at
+    }
+    jobs {
+        bigint id PK
+        character_varying_255_ queue
+        text payload
+        smallint attempts
+        integer reserved_at
+        integer available_at
+        integer created_at
+    }
+    migrations {
+        integer id PK
+        character_varying_255_ migration
+        integer batch
+    }
+    notification_deliveries {
+        bigint id PK
+        bigint tenant_id
+        bigint outbox_message_id
+        character_varying_32_ channel
+        character_varying_32_ state
+        integer attempts
+        timestamp_with_time_zone sent_at
+        character_varying_255_ last_error_code
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    operatories {
+        bigint id PK
+        bigint tenant_id
+        character_varying_255_ name
+        boolean active
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    operatory_services {
+        bigint id PK
+        bigint tenant_id
+        bigint operatory_id
+        bigint service_id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    outbox_messages {
+        bigint id PK
+        bigint tenant_id
+        character_varying_255_ event_type
+        bigint resource_id
+        integer version
+        character_varying_255_ deduplication_key
+        character_varying_32_ state
+        integer attempts
+        timestamp_with_time_zone available_at
+        timestamp_with_time_zone processed_at
+        character_varying_255_ last_error_code
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    password_reset_tokens {
+        bigint tenant_id PK
+        character_varying_255_ email PK
+        character_varying_255_ token
+        timestamp_with_time_zone created_at
+    }
+    patient_profiles {
+        bigint id PK
+        bigint tenant_id
+        bigint user_id
+        character_varying_255_ first_name
+        character_varying_255_ last_name
+        character_varying_255_ email
+        character_varying_255_ phone
+        date date_of_birth
+        character_varying_32_ status
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    platform_admins {
+        bigint id PK
+        character_varying_255_ name
+        character_varying_255_ email
+        character_varying_255_ password
+        character_varying_32_ status
+        text two_factor_secret
+        text two_factor_recovery_codes
+        timestamp_with_time_zone two_factor_confirmed_at
+        character_varying_100_ remember_token
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    platform_audit_events {
+        bigint id PK
+        bigint platform_admin_id
+        bigint tenant_id
+        character_varying_64_ action
+        character_varying_32_ previous_status
+        character_varying_32_ new_status
+        timestamp_0__with_time_zone occurred_at
+    }
+    practitioner_breaks {
+        bigint id PK
+        bigint tenant_id
+        bigint practitioner_id
+        smallint weekday
+        time_without_time_zone local_start
+        time_without_time_zone local_end
+        date effective_from
+        date effective_to
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    practitioner_services {
+        bigint id PK
+        bigint tenant_id
+        bigint practitioner_id
+        bigint service_id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    practitioner_shifts {
+        bigint id PK
+        bigint tenant_id
+        bigint practitioner_id
+        smallint weekday
+        time_without_time_zone local_start
+        time_without_time_zone local_end
+        date effective_from
+        date effective_to
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    practitioners {
+        bigint id PK
+        bigint tenant_id
+        bigint user_id
+        character_varying_255_ display_title
+        character_varying_255_ specialization
+        boolean active
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    schedule_blocks {
+        bigint id PK
+        bigint tenant_id
+        character_varying_32_ resource_type
+        bigint practitioner_id
+        bigint operatory_id
+        timestamp_with_time_zone starts_at
+        timestamp_with_time_zone ends_at
+        character_varying_255_ reason
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    services {
+        bigint id PK
+        bigint tenant_id
+        character_varying_255_ name
+        character_varying_255_ category
+        text description
+        smallint duration_minutes
+        smallint buffer_before_minutes
+        smallint buffer_after_minutes
+        integer price_minor
+        character_3_ currency
+        boolean active
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    sessions {
+        character_varying_255_ id PK
+        bigint tenant_id
+        bigint user_id
+        character_varying_45_ ip_address
+        text user_agent
+        text payload
+        integer last_activity
+    }
+    shopify_connections {
+        bigint id PK
+        bigint tenant_id
+        character_varying_255_ shop_host
+        character_varying_255_ shop_id
+        character_varying_255_ primary_domain
+        text private_token
+        character_varying_255_ status
+        integer generation
+        timestamp_0__with_time_zone verified_at
+        timestamp_0__with_time_zone created_at
+        timestamp_0__with_time_zone updated_at
+    }
+    shopping_carts {
+        bigint id PK
+        bigint tenant_id
+        integer connection_generation
+        character_varying_64_ session_hash
+        text shopify_cart_id
+        timestamp_0__with_time_zone created_at
+        timestamp_0__with_time_zone updated_at
+    }
+    staff_invitations {
+        bigint id PK
+        bigint tenant_id
+        character_varying_255_ email
+        jsonb roles
+        character_varying_64_ token_hash
+        timestamp_with_time_zone expires_at
+        timestamp_with_time_zone accepted_at
+        bigint invited_by
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    subscription_items {
+        bigint id PK
+        bigint subscription_id
+        character_varying_255_ stripe_id
+        character_varying_255_ stripe_product
+        character_varying_255_ stripe_price
+        character_varying_255_ meter_id
+        character_varying_255_ meter_event_name
+        integer quantity
+        timestamp_0__with_time_zone created_at
+        timestamp_0__with_time_zone updated_at
+    }
+    subscriptions {
+        bigint id PK
+        bigint tenant_id
+        character_varying_255_ type
+        character_varying_255_ stripe_id
+        character_varying_255_ stripe_status
+        character_varying_255_ stripe_price
+        integer quantity
+        timestamp_0__with_time_zone trial_ends_at
+        timestamp_0__with_time_zone ends_at
+        timestamp_0__with_time_zone created_at
+        timestamp_0__with_time_zone updated_at
+    }
+    tenants {
+        bigint id PK
+        character_varying_255_ name
+        character_varying_63_ subdomain
+        character_varying_255_ timezone
+        character_3_ currency
+        character_varying_32_ lifecycle_status
+        smallint slot_interval_minutes
+        smallint booking_horizon_days
+        integer minimum_lead_minutes
+        smallint cancellation_window_hours
+        jsonb branding
+        character_varying_255_ stripe_id
+        character_varying_255_ pm_type
+        character_varying_4_ pm_last_four
+        timestamp_with_time_zone trial_ends_at
+        character_varying_32_ billing_status
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    user_roles {
+        bigint id PK
+        bigint tenant_id
+        bigint user_id
+        character_varying_32_ role
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    users {
+        bigint id PK
+        bigint tenant_id
+        character_varying_255_ name
+        character_varying_255_ email
+        character_varying_255_ password
+        character_varying_32_ status
+        timestamp_with_time_zone email_verified_at
+        text two_factor_secret
+        text two_factor_recovery_codes
+        timestamp_with_time_zone two_factor_confirmed_at
+        character_varying_100_ remember_token
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    webhook_events {
+        bigint id PK
+        character_varying_255_ provider
+        character_varying_255_ provider_event_id
+        character_varying_255_ event_type
+        bigint tenant_id
+        text raw_payload
+        character_varying_255_ state
+        integer attempts
+        character_varying_255_ last_error_code
+        timestamp_0__with_time_zone processed_at
+        timestamp_0__with_time_zone created_at
+        timestamp_0__with_time_zone updated_at
+    }
+    users |o--o{ appointment_events : "tenant_id+actor_id"
+    appointments ||--o{ appointment_events : "tenant_id+appointment_id"
+    tenants ||--o{ appointment_events : "tenant_id"
+    tenants ||--o{ appointments : "tenant_id"
+    operatories ||--o{ appointments : "tenant_id+operatory_id"
+    patient_profiles ||--o{ appointments : "tenant_id+patient_id"
+    practitioners ||--o{ appointments : "tenant_id+practitioner_id"
+    services ||--o{ appointments : "tenant_id+service_id"
+    users |o--o{ audit_events : "tenant_id+actor_id"
+    tenants ||--o{ audit_events : "tenant_id"
+    tenants ||--o| billing_checkout_sessions : "tenant_id"
+    tenants ||--o| billing_entitlements : "tenant_id"
+    appointments |o--o{ care_assignments : "tenant_id+appointment_id+patient_id"
+    tenants ||--o{ care_assignments : "tenant_id"
+    users ||--o{ care_assignments : "tenant_id+granted_by"
+    patient_profiles ||--o{ care_assignments : "tenant_id+patient_id"
+    practitioners ||--o{ care_assignments : "tenant_id+practitioner_id"
+    tenants ||--o{ clinic_hours : "tenant_id"
+    appointments ||--o{ clinical_notes : "tenant_id+appointment_id+patient_id"
+    tenants ||--o{ clinical_notes : "tenant_id"
+    patient_profiles ||--o{ clinical_notes : "tenant_id+patient_id"
+    practitioners ||--o{ clinical_notes : "tenant_id+practitioner_id"
+    clinical_notes |o--o{ clinical_notes : "tenant_id+supersedes_id+patient_id"
+    tenants ||--o{ consent_records : "tenant_id"
+    patient_profiles ||--o{ consent_records : "tenant_id+patient_id"
+    users |o--o{ consent_records : "tenant_id+user_id"
+    users ||--o{ idempotency_requests : "tenant_id+actor_id"
+    tenants ||--o{ idempotency_requests : "tenant_id"
+    appointments ||--o{ idempotency_requests : "tenant_id+result_resource_id"
+    appointments |o--o{ intake_submissions : "tenant_id+appointment_id+patient_id"
+    users ||--o{ intake_submissions : "tenant_id+author_id"
+    tenants ||--o{ intake_submissions : "tenant_id"
+    patient_profiles ||--o{ intake_submissions : "tenant_id+patient_id"
+    intake_submissions |o--o{ intake_submissions : "tenant_id+supersedes_id+patient_id"
+    tenants ||--o{ notification_deliveries : "tenant_id"
+    outbox_messages ||--o{ notification_deliveries : "tenant_id+outbox_message_id"
+    tenants ||--o{ operatories : "tenant_id"
+    tenants ||--o{ operatory_services : "tenant_id"
+    operatories ||--o{ operatory_services : "tenant_id+operatory_id"
+    services ||--o{ operatory_services : "tenant_id+service_id"
+    tenants ||--o{ outbox_messages : "tenant_id"
+    appointments ||--o{ outbox_messages : "tenant_id+resource_id"
+    tenants ||--o{ password_reset_tokens : "tenant_id"
+    tenants ||--o{ patient_profiles : "tenant_id"
+    users |o--o| patient_profiles : "tenant_id+user_id"
+    platform_admins ||--o{ platform_audit_events : "platform_admin_id"
+    tenants ||--o{ platform_audit_events : "tenant_id"
+    tenants ||--o{ practitioner_breaks : "tenant_id"
+    practitioners ||--o{ practitioner_breaks : "tenant_id+practitioner_id"
+    tenants ||--o{ practitioner_services : "tenant_id"
+    practitioners ||--o{ practitioner_services : "tenant_id+practitioner_id"
+    services ||--o{ practitioner_services : "tenant_id+service_id"
+    tenants ||--o{ practitioner_shifts : "tenant_id"
+    practitioners ||--o{ practitioner_shifts : "tenant_id+practitioner_id"
+    tenants ||--o{ practitioners : "tenant_id"
+    users ||--o| practitioners : "tenant_id+user_id"
+    tenants ||--o{ schedule_blocks : "tenant_id"
+    operatories |o--o{ schedule_blocks : "tenant_id+operatory_id"
+    practitioners |o--o{ schedule_blocks : "tenant_id+practitioner_id"
+    tenants ||--o{ services : "tenant_id"
+    tenants ||--o| shopify_connections : "tenant_id"
+    tenants ||--o{ shopping_carts : "tenant_id"
+    tenants ||--o{ staff_invitations : "tenant_id"
+    users |o--o{ staff_invitations : "tenant_id+invited_by"
+    subscriptions ||--o{ subscription_items : "subscription_id"
+    tenants ||--o{ subscriptions : "tenant_id"
+    tenants ||--o{ user_roles : "tenant_id"
+    users ||--o{ user_roles : "tenant_id+user_id"
+    tenants ||--o{ users : "tenant_id"
+    tenants |o--o{ webhook_events : "tenant_id"

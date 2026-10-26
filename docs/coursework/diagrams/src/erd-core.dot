@@ -1,0 +1,17 @@
+digraph G { graph [rankdir=LR, bgcolor="white", nodesep=0.36, ranksep=0.52, pad=0.12, splines=polyline]; node [shape=plain,fontname="Arial",fontsize=13]; edge [color="#555555",penwidth=1.1,arrowsize=0.8];
+"tenants" [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dddddd" COLSPAN="2"><B>tenants</B></TD></TR><TR><TD ALIGN="LEFT" PORT="id">id</TD><TD ALIGN="RIGHT">PK</TD></TR><TR><TD ALIGN="LEFT" PORT="subdomain">subdomain</TD><TD ALIGN="RIGHT"></TD></TR><TR><TD ALIGN="LEFT" PORT="timezone">timezone</TD><TD ALIGN="RIGHT"></TD></TR></TABLE>>];
+"users" [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dddddd" COLSPAN="2"><B>users</B></TD></TR><TR><TD ALIGN="LEFT" PORT="id">id</TD><TD ALIGN="RIGHT">PK</TD></TR><TR><TD ALIGN="LEFT" PORT="tenant_id">tenant_id</TD><TD ALIGN="RIGHT">FK</TD></TR><TR><TD ALIGN="LEFT" PORT="email">email</TD><TD ALIGN="RIGHT"></TD></TR></TABLE>>];
+"user_roles" [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dddddd" COLSPAN="2"><B>user_roles</B></TD></TR><TR><TD ALIGN="LEFT" PORT="id">id</TD><TD ALIGN="RIGHT">PK</TD></TR><TR><TD ALIGN="LEFT" PORT="tenant_id">tenant_id</TD><TD ALIGN="RIGHT">FK</TD></TR><TR><TD ALIGN="LEFT" PORT="user_id">user_id</TD><TD ALIGN="RIGHT">FK</TD></TR></TABLE>>];
+"patient_profiles" [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dddddd" COLSPAN="2"><B>patient_profiles</B></TD></TR><TR><TD ALIGN="LEFT" PORT="id">id</TD><TD ALIGN="RIGHT">PK</TD></TR><TR><TD ALIGN="LEFT" PORT="tenant_id">tenant_id</TD><TD ALIGN="RIGHT">FK</TD></TR><TR><TD ALIGN="LEFT" PORT="user_id">user_id ?</TD><TD ALIGN="RIGHT">FK</TD></TR></TABLE>>];
+"practitioners" [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dddddd" COLSPAN="2"><B>practitioners</B></TD></TR><TR><TD ALIGN="LEFT" PORT="id">id</TD><TD ALIGN="RIGHT">PK</TD></TR><TR><TD ALIGN="LEFT" PORT="tenant_id">tenant_id</TD><TD ALIGN="RIGHT">FK</TD></TR><TR><TD ALIGN="LEFT" PORT="user_id">user_id</TD><TD ALIGN="RIGHT">FK</TD></TR></TABLE>>];
+"staff_invitations" [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dddddd" COLSPAN="2"><B>staff_invitations</B></TD></TR><TR><TD ALIGN="LEFT" PORT="id">id</TD><TD ALIGN="RIGHT">PK</TD></TR><TR><TD ALIGN="LEFT" PORT="tenant_id">tenant_id</TD><TD ALIGN="RIGHT">FK</TD></TR></TABLE>>];
+"tenants" -> "patient_profiles" [dir=both, arrowtail="teetee",arrowhead="crowodot"];
+"users" -> "patient_profiles" [dir=both, arrowtail="teeodot",arrowhead="teeodot"];
+"tenants" -> "practitioners" [dir=both, arrowtail="teetee",arrowhead="crowodot"];
+"users" -> "practitioners" [dir=both, arrowtail="teetee",arrowhead="teeodot"];
+"tenants" -> "staff_invitations" [dir=both, arrowtail="teetee",arrowhead="crowodot"];
+"users" -> "staff_invitations" [dir=both, arrowtail="teeodot",arrowhead="crowodot"];
+"tenants" -> "user_roles" [dir=both, arrowtail="teetee",arrowhead="crowodot"];
+"users" -> "user_roles" [dir=both, arrowtail="teetee",arrowhead="crowodot"];
+"tenants" -> "users" [dir=both, arrowtail="teetee",arrowhead="crowodot"];
+}

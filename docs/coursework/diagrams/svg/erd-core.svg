@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="864" height="760" viewBox="0 0 864 760" role="img" aria-label="ERD · Identity and clinic ownership"><rect width="864" height="760" fill="white"/><style>text{font-family:Arial,sans-serif;fill:#222} .small{font-size:13px} .body{font-size:16px} .heading{font-size:25px;font-weight:700} .line{fill:none;stroke:#444;stroke-width:1.6}</style><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="none" stroke="#444" stroke-width="1.2"/></marker></defs><text x="32" y="40" class="heading">ERD · Identity and clinic ownership</text><text x="32" y="65" class="small">PostgreSQL 16.15 · crow’s foot · physical keys; module projection</text><svg x="32" y="92" width="800" height="550" viewBox="0 0 399 487"><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(8.64 478.24)">
+<title>G</title>
+<polygon fill="white" stroke="none" points="-8.64,8.64 -8.64,-478.24 390.1,-478.24 390.1,8.64 -8.64,8.64"/>
+<!-- tenants -->
+<g id="node1" class="node">
+<title>tenants</title>
+<polygon fill="none" stroke="black" points="0,-162.2 0,-266.6 102.94,-266.6 102.94,-162.2 0,-162.2"/>
+<polygon fill="#dddddd" stroke="none" points="1,-240 1,-265.6 101.94,-265.6 101.94,-240 1,-240"/>
+<text xml:space="preserve" text-anchor="start" x="28.35" y="-249.9" font-family="Arial" font-weight="bold" font-size="13.00">tenants</text>
+<text xml:space="preserve" text-anchor="start" x="6" y="-222" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="79.6" y="-222" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="6" y="-196.4" font-family="Arial" font-size="13.00">subdomain</text>
+<text xml:space="preserve" text-anchor="start" x="6" y="-170.8" font-family="Arial" font-size="13.00">timezone</text>
+</g>
+<!-- users -->
+<g id="node2" class="node">
+<title>users</title>
+<polygon fill="none" stroke="black" points="139.94,-162.2 139.94,-266.6 232.77,-266.6 232.77,-162.2 139.94,-162.2"/>
+<polygon fill="#dddddd" stroke="none" points="140.94,-240 140.94,-265.6 231.77,-265.6 231.77,-240 140.94,-240"/>
+<text xml:space="preserve" text-anchor="start" x="169.01" y="-249.9" font-family="Arial" font-weight="bold" font-size="13.00">users</text>
+<text xml:space="preserve" text-anchor="start" x="145.94" y="-222" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="209.43" y="-222" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="145.94" y="-196.4" font-family="Arial" font-size="13.00">tenant_id</text>
+<text xml:space="preserve" text-anchor="start" x="210.16" y="-196.4" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="145.94" y="-170.8" font-family="Arial" font-size="13.00">email</text>
+</g>
+<!-- tenants&#45;&gt;users -->
+<g id="edge9" class="edge">
+<title>tenants&#45;&gt;users</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M110.61,-214.4C115.27,-214.4 119.99,-214.4 124.67,-214.4"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="103.51,-218.4 103.51,-210.4 105.11,-210.4 105.11,-218.4 103.51,-218.4"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="102.71,-214.4 106.71,-214.4"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="107.51,-218.4 107.51,-210.4 109.11,-210.4 109.11,-218.4 107.51,-218.4"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="106.71,-214.4 110.71,-214.4"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="131.92,-214.4 139.92,-218 136.29,-214.4 139.55,-214.4 139.55,-214.4 139.55,-214.4 136.29,-214.4 139.92,-210.8 131.92,-214.4"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="126.83" cy="-214.4" rx="3.2" ry="3.2"/>
+</g>
+<!-- user_roles -->
+<g id="node3" class="node">
+<title>user_roles</title>
+<polygon fill="none" stroke="black" points="279.2,-365.2 279.2,-469.6 372.03,-469.6 372.03,-365.2 279.2,-365.2"/>
+<polygon fill="#dddddd" stroke="none" points="280.2,-443 280.2,-468.6 371.03,-468.6 371.03,-443 280.2,-443"/>
+<text xml:space="preserve" text-anchor="start" x="292.73" y="-452.9" font-family="Arial" font-weight="bold" font-size="13.00">user_roles</text>
+<text xml:space="preserve" text-anchor="start" x="285.2" y="-425" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="348.69" y="-425" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="285.2" y="-399.4" font-family="Arial" font-size="13.00">tenant_id</text>
+<text xml:space="preserve" text-anchor="start" x="349.42" y="-399.4" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="285.2" y="-373.8" font-family="Arial" font-size="13.00">user_id</text>
+<text xml:space="preserve" text-anchor="start" x="349.42" y="-373.8" font-family="Arial" font-size="13.00">FK</text>
+</g>
+<!-- tenants&#45;&gt;user_roles -->
+<g id="edge7" class="edge">
+<title>tenants&#45;&gt;user_roles</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M108.25,-269.88C125.44,-286.98 139.94,-301.4 139.94,-301.4 139.94,-301.4 212.03,-346.68 266.13,-380.66"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="100.59,-267.9 106.23,-262.23 107.37,-263.36 101.72,-269.03 100.59,-267.9"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="102.84,-264.5 105.68,-267.32"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="103.43,-270.73 109.07,-265.05 110.2,-266.18 104.56,-271.85 103.43,-270.73"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="105.68,-267.32 108.52,-270.15"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="272.35,-384.57 277.21,-391.88 276.05,-386.9 278.81,-388.63 278.81,-388.63 278.81,-388.63 276.05,-386.9 281.04,-385.78 272.35,-384.57"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="268.04" cy="-381.86" rx="3.2" ry="3.2"/>
+</g>
+<!-- patient_profiles -->
+<g id="node4" class="node">
+<title>patient_profiles</title>
+<polygon fill="none" stroke="black" points="271.22,-235.2 271.22,-339.6 380.01,-339.6 380.01,-235.2 271.22,-235.2"/>
+<polygon fill="#dddddd" stroke="none" points="272.22,-313 272.22,-338.6 379.01,-338.6 379.01,-313 272.22,-313"/>
+<text xml:space="preserve" text-anchor="start" x="277.22" y="-322.9" font-family="Arial" font-weight="bold" font-size="13.00">patient_profiles</text>
+<text xml:space="preserve" text-anchor="start" x="277.22" y="-295" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="356.67" y="-295" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="277.22" y="-269.4" font-family="Arial" font-size="13.00">tenant_id</text>
+<text xml:space="preserve" text-anchor="start" x="357.4" y="-269.4" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="277.22" y="-243.8" font-family="Arial" font-size="13.00">user_id ?</text>
+<text xml:space="preserve" text-anchor="start" x="357.4" y="-243.8" font-family="Arial" font-size="13.00">FK</text>
+</g>
+<!-- tenants&#45;&gt;patient_profiles -->
+<g id="edge1" class="edge">
+<title>tenants&#45;&gt;patient_profiles</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M109.14,-256.51C125.94,-269 139.94,-279.4 139.94,-279.4 139.94,-279.4 203.33,-282.15 255.83,-284.42"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="101.1,-255.52 105.87,-249.1 107.16,-250.06 102.38,-256.48 101.1,-255.52"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="102.84,-251.83 106.05,-254.22"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="104.31,-257.91 109.08,-251.49 110.37,-252.44 105.6,-258.86 104.31,-257.91"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="106.05,-254.22 109.27,-256.61"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="263.33,-284.75 271.17,-288.69 267.7,-284.93 270.96,-285.08 270.96,-285.08 270.96,-285.08 267.7,-284.93 271.48,-281.49 263.33,-284.75"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="258.25" cy="-284.52" rx="3.2" ry="3.2"/>
+</g>
+<!-- practitioners -->
+<g id="node5" class="node">
+<title>practitioners</title>
+<polygon fill="none" stroke="black" points="279.2,-105.2 279.2,-209.6 372.03,-209.6 372.03,-105.2 279.2,-105.2"/>
+<polygon fill="#dddddd" stroke="none" points="280.2,-183 280.2,-208.6 371.03,-208.6 371.03,-183 280.2,-183"/>
+<text xml:space="preserve" text-anchor="start" x="286.24" y="-192.9" font-family="Arial" font-weight="bold" font-size="13.00">practitioners</text>
+<text xml:space="preserve" text-anchor="start" x="285.2" y="-165" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="348.69" y="-165" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="285.2" y="-139.4" font-family="Arial" font-size="13.00">tenant_id</text>
+<text xml:space="preserve" text-anchor="start" x="349.42" y="-139.4" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="285.2" y="-113.8" font-family="Arial" font-size="13.00">user_id</text>
+<text xml:space="preserve" text-anchor="start" x="349.42" y="-113.8" font-family="Arial" font-size="13.00">FK</text>
+</g>
+<!-- tenants&#45;&gt;practitioners -->
+<g id="edge3" class="edge">
+<title>tenants&#45;&gt;practitioners</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M109.14,-172.29C125.94,-159.8 139.94,-149.4 139.94,-149.4 139.94,-149.4 232.77,-149.4 232.77,-149.4 232.77,-149.4 246.58,-150.6 263.49,-152.08"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="105.87,-179.7 101.1,-173.28 102.38,-172.32 107.16,-178.74 105.87,-179.7"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="102.84,-176.97 106.05,-174.58"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="109.08,-177.31 104.31,-170.89 105.6,-169.94 110.37,-176.36 109.08,-177.31"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="106.05,-174.58 109.27,-172.19"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="270.9,-152.72 278.55,-157 275.25,-153.1 278.5,-153.38 278.5,-153.38 278.5,-153.38 275.25,-153.1 279.18,-149.83 270.9,-152.72"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="265.82" cy="-152.28" rx="3.2" ry="3.2"/>
+</g>
+<!-- staff_invitations -->
+<g id="node6" class="node">
+<title>staff_invitations</title>
+<polygon fill="none" stroke="black" points="269.77,0 269.77,-78.8 381.46,-78.8 381.46,0 269.77,0"/>
+<polygon fill="#dddddd" stroke="none" points="270.77,-52.2 270.77,-77.8 380.46,-77.8 380.46,-52.2 270.77,-52.2"/>
+<text xml:space="preserve" text-anchor="start" x="275.77" y="-62.1" font-family="Arial" font-weight="bold" font-size="13.00">staff_invitations</text>
+<text xml:space="preserve" text-anchor="start" x="275.77" y="-34.2" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="358.11" y="-34.2" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="275.77" y="-8.6" font-family="Arial" font-size="13.00">tenant_id</text>
+<text xml:space="preserve" text-anchor="start" x="358.84" y="-8.6" font-family="Arial" font-size="13.00">FK</text>
+</g>
+<!-- tenants&#45;&gt;staff_invitations -->
+<g id="edge5" class="edge">
+<title>tenants&#45;&gt;staff_invitations</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M108.7,-168.76C125.69,-154.97 139.94,-143.4 139.94,-143.4 139.94,-143.4 203.61,-107.54 256.18,-77.94"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="105.99,-176.11 100.94,-169.9 102.19,-168.89 107.23,-175.1 105.99,-176.11"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="102.84,-173.51 105.95,-170.99"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="109.09,-173.59 104.05,-167.38 105.29,-166.37 110.33,-172.58 109.09,-173.59"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="105.95,-170.99 109.06,-168.47"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="262.66,-74.29 271.4,-73.5 266.47,-72.14 269.31,-70.54 269.31,-70.54 269.31,-70.54 266.47,-72.14 267.87,-67.23 262.66,-74.29"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="258.23" cy="-76.79" rx="3.2" ry="3.2"/>
+</g>
+<!-- users&#45;&gt;user_roles -->
+<g id="edge8" class="edge">
+<title>users&#45;&gt;user_roles</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M222.38,-273.04C244.82,-310.62 269.77,-352.4 269.77,-352.4 269.77,-352.4 270.05,-352.73 270.57,-353.34"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="215.49,-269.31 222.36,-265.21 223.18,-266.58 216.31,-270.68 215.49,-269.31"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="218.51,-266.57 220.56,-270.01"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="217.54,-272.74 224.41,-268.64 225.23,-270.02 218.36,-274.12 217.54,-272.74"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="220.56,-270.01 222.62,-273.44"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="275.21,-358.85 277.62,-367.28 278.03,-362.18 280.13,-364.68 280.13,-364.68 280.13,-364.68 278.03,-362.18 283.12,-362.64 275.21,-358.85"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="271.93" cy="-354.96" rx="3.2" ry="3.2"/>
+</g>
+<!-- users&#45;&gt;patient_profiles -->
+<g id="edge2" class="edge">
+<title>users&#45;&gt;patient_profiles</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M242.72,-243.84C248.89,-247.13 255.21,-250.49 261.48,-253.82"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="231.51,-242.41 235.26,-235.35 236.68,-236.1 232.92,-243.16 231.51,-242.41"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="232.68,-238.51 236.21,-240.38"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="239.52" cy="-242.14" rx="3.2" ry="3.2"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="272.41,-255.1 268.65,-262.17 267.24,-261.42 270.99,-254.35 272.41,-255.1"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="271.23,-259.01 267.7,-257.13"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="264.39" cy="-255.37" rx="3.2" ry="3.2"/>
+</g>
+<!-- users&#45;&gt;practitioners -->
+<g id="edge4" class="edge">
+<title>users&#45;&gt;practitioners</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M239.82,-192.61C249.28,-188.68 259.18,-184.57 268.74,-180.61"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="234.95,-198.97 231.88,-191.58 233.36,-190.96 236.43,-198.35 234.95,-198.97"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="232.68,-195.58 236.37,-194.04"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="238.65,-197.43 235.58,-190.04 237.06,-189.43 240.12,-196.82 238.65,-197.43"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="236.37,-194.04 240.07,-192.51"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="277.06,-172.81 280.13,-180.2 278.66,-180.82 275.59,-173.43 277.06,-172.81"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="279.34,-176.2 275.64,-177.74"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="272.18" cy="-179.17" rx="3.2" ry="3.2"/>
+</g>
+<!-- users&#45;&gt;staff_invitations -->
+<g id="edge6" class="edge">
+<title>users&#45;&gt;staff_invitations</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M228.89,-152.92C249.38,-122.58 269.77,-92.4 269.77,-92.4 269.77,-92.4 270.77,-91.44 272.5,-89.77"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="226.31,-163.88 219.68,-159.41 220.58,-158.08 227.2,-162.56 226.31,-163.88"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="222.55,-162.31 224.79,-158.99"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="226.89" cy="-155.89" rx="3.2" ry="3.2"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="277.88,-84.57 286.13,-81.6 281.02,-81.53 283.37,-79.26 283.37,-79.26 283.37,-79.26 281.02,-81.53 281.13,-76.42 277.88,-84.57"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="274.22" cy="-88.1" rx="3.2" ry="3.2"/>
+</g>
+</g>
+</svg><text x="32" y="675" class="small" text-anchor="start">Key projection: full types, attributes and every composite FK are in the dictionary.</text><text x="32" y="699" class="small" text-anchor="start">PK = primary key; FK = foreign key; ? = nullable; circle = optional; crow = many.</text><text x="32" y="723" class="small" text-anchor="start">Tenant ownership edges outside this module are omitted; no relationship is inferred.</text></svg>

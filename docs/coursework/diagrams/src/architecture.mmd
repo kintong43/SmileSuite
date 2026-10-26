@@ -1,0 +1,10 @@
+flowchart TB
+ Browser[Browser: Blade / Tailwind / Alpine] -->|HTTP local / HTTPS deployment| App[Laravel 13 / PHP 8.4]
+ App -->|PDO: trusted tenant context| DB[(PostgreSQL 16: smilesuite)]
+ App -->|Server HTTP API: tenant-bound token| CMS[Directus 11.17.4 API]
+ CMS --> CMSDB[(Separate PostgreSQL CMS database)]
+ App -->|Database queue / outbox| Worker[Laravel worker]
+ Worker --> DB
+ App -.->|HTTPS; live gates disabled| External[Stripe / Shopify]
+ Worker -->|Configured mail transport| Mail[Mail log locally]
+ Editor[CMS editor] -->|Separate CMS login| CMS

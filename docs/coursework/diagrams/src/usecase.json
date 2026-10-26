@@ -1,0 +1,131 @@
+{
+  "system": "SmileSuite",
+  "groups": [
+    {
+      "name": "usecase-patient",
+      "actor": "Patient",
+      "usecases": [
+        {
+          "id": "UC-01",
+          "name": "Register account",
+          "objective": "OBJ-01",
+          "requirement": "FR-01"
+        },
+        {
+          "id": "UC-02",
+          "name": "Sign in and manage profile",
+          "objective": "OBJ-01",
+          "requirement": "FR-02"
+        },
+        {
+          "id": "UC-03",
+          "name": "Book appointment",
+          "objective": "OBJ-02",
+          "requirement": "FR-03"
+        },
+        {
+          "id": "UC-04",
+          "name": "Reschedule or cancel visit",
+          "objective": "OBJ-02",
+          "requirement": "FR-04"
+        },
+        {
+          "id": "UC-05",
+          "name": "Submit and view own intake",
+          "objective": "OBJ-03",
+          "requirement": "FR-05"
+        },
+        {
+          "id": "UC-06",
+          "name": "Browse content and clinic store",
+          "objective": "OBJ-04",
+          "requirement": "FR-08"
+        }
+      ]
+    },
+    {
+      "name": "usecase-staff",
+      "actor": "Clinic staff",
+      "usecases": [
+        {
+          "id": "UC-07",
+          "name": "View clinic schedule",
+          "objective": "OBJ-02",
+          "requirement": "FR-03"
+        },
+        {
+          "id": "UC-08",
+          "name": "Register walk-in patient",
+          "objective": "OBJ-02",
+          "requirement": "FR-06"
+        },
+        {
+          "id": "UC-09",
+          "name": "Record appointment status",
+          "objective": "OBJ-02",
+          "requirement": "FR-04"
+        },
+        {
+          "id": "UC-10",
+          "name": "Read assigned clinical records",
+          "objective": "OBJ-03",
+          "requirement": "FR-05"
+        },
+        {
+          "id": "UC-11",
+          "name": "Write clinical note amendment",
+          "objective": "OBJ-03",
+          "requirement": "FR-05"
+        },
+        {
+          "id": "UC-12",
+          "name": "Review notification delivery",
+          "objective": "OBJ-02",
+          "requirement": "FR-09"
+        }
+      ]
+    },
+    {
+      "name": "usecase-management",
+      "actor": "Authorized manager",
+      "usecases": [
+        {
+          "id": "UC-13",
+          "name": "Configure clinic and staff",
+          "objective": "OBJ-01",
+          "requirement": "FR-06"
+        },
+        {
+          "id": "UC-14",
+          "name": "View and export reports",
+          "objective": "OBJ-04",
+          "requirement": "FR-10"
+        },
+        {
+          "id": "UC-15",
+          "name": "Manage clinic subscription",
+          "objective": "OBJ-04",
+          "requirement": "FR-07"
+        },
+        {
+          "id": "UC-16",
+          "name": "Manage published content",
+          "objective": "OBJ-04",
+          "requirement": "FR-11"
+        },
+        {
+          "id": "UC-17",
+          "name": "Publish safe CMS projections",
+          "objective": "OBJ-04",
+          "requirement": "FR-11"
+        },
+        {
+          "id": "UC-18",
+          "name": "Administer tenant metadata",
+          "objective": "OBJ-01",
+          "requirement": "FR-12"
+        }
+      ]
+    }
+  ]
+}

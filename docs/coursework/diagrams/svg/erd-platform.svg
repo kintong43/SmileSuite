@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="864" height="760" viewBox="0 0 864 760" role="img" aria-label="ERD · Platform and operational audit"><rect width="864" height="760" fill="white"/><style>text{font-family:Arial,sans-serif;fill:#222} .small{font-size:13px} .body{font-size:16px} .heading{font-size:25px;font-weight:700} .line{fill:none;stroke:#444;stroke-width:1.6}</style><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="none" stroke="#444" stroke-width="1.2"/></marker></defs><text x="32" y="40" class="heading">ERD · Platform and operational audit</text><text x="32" y="65" class="small">PostgreSQL 16.15 · crow’s foot · physical keys; module projection</text><svg x="32" y="92" width="800" height="550" viewBox="0 0 365 462"><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(8.64 453.24)">
+<title>G</title>
+<polygon fill="white" stroke="none" points="-8.64,8.64 -8.64,-453.24 356.47,-453.24 356.47,8.64 -8.64,8.64"/>
+<!-- platform_admins -->
+<g id="node1" class="node">
+<title>platform_admins</title>
+<polygon fill="none" stroke="black" points="21.69,-25.6 21.69,-78.8 138.43,-78.8 138.43,-25.6 21.69,-25.6"/>
+<polygon fill="#dddddd" stroke="none" points="22.69,-52.2 22.69,-77.8 137.43,-77.8 137.43,-52.2 22.69,-52.2"/>
+<text xml:space="preserve" text-anchor="start" x="27.69" y="-62.1" font-family="Arial" font-weight="bold" font-size="13.00">platform_admins</text>
+<text xml:space="preserve" text-anchor="start" x="27.69" y="-34.2" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="115.09" y="-34.2" font-family="Arial" font-size="13.00">PK</text>
+</g>
+<!-- platform_audit_events -->
+<g id="node2" class="node">
+<title>platform_audit_events</title>
+<polygon fill="none" stroke="black" points="197.12,0 197.12,-104.4 347.83,-104.4 347.83,0 197.12,0"/>
+<polygon fill="#dddddd" stroke="none" points="198.12,-77.8 198.12,-103.4 346.83,-103.4 346.83,-77.8 198.12,-77.8"/>
+<text xml:space="preserve" text-anchor="start" x="203.12" y="-87.7" font-family="Arial" font-weight="bold" font-size="13.00">platform_audit_events</text>
+<text xml:space="preserve" text-anchor="start" x="203.12" y="-59.8" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="324.48" y="-59.8" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="203.12" y="-34.2" font-family="Arial" font-size="13.00">platform_admin_id</text>
+<text xml:space="preserve" text-anchor="start" x="325.21" y="-34.2" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="203.12" y="-8.6" font-family="Arial" font-size="13.00">tenant_id</text>
+<text xml:space="preserve" text-anchor="start" x="325.21" y="-8.6" font-family="Arial" font-size="13.00">FK</text>
+</g>
+<!-- platform_admins&#45;&gt;platform_audit_events -->
+<g id="edge2" class="edge">
+<title>platform_admins&#45;&gt;platform_audit_events</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M146.18,-52.2C157.65,-52.2 169.78,-52.2 181.79,-52.2"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="138.99,-56.2 138.99,-48.2 140.59,-48.2 140.59,-56.2 138.99,-56.2"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="138.19,-52.2 142.19,-52.2"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="142.99,-56.2 142.99,-48.2 144.59,-48.2 144.59,-56.2 142.99,-56.2"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="142.19,-52.2 146.19,-52.2"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="189.07,-52.2 197.07,-55.8 193.44,-52.2 196.71,-52.2 196.71,-52.2 196.71,-52.2 193.44,-52.2 197.07,-48.6 189.07,-52.2"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="183.98" cy="-52.2" rx="3.2" ry="3.2"/>
+</g>
+<!-- tenants -->
+<g id="node3" class="node">
+<title>tenants</title>
+<polygon fill="none" stroke="black" points="28.59,-105 28.59,-209.4 131.53,-209.4 131.53,-105 28.59,-105"/>
+<polygon fill="#dddddd" stroke="none" points="29.59,-182.8 29.59,-208.4 130.53,-208.4 130.53,-182.8 29.59,-182.8"/>
+<text xml:space="preserve" text-anchor="start" x="56.95" y="-192.7" font-family="Arial" font-weight="bold" font-size="13.00">tenants</text>
+<text xml:space="preserve" text-anchor="start" x="34.59" y="-164.8" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="108.19" y="-164.8" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="34.59" y="-139.2" font-family="Arial" font-size="13.00">subdomain</text>
+<text xml:space="preserve" text-anchor="start" x="34.59" y="-113.6" font-family="Arial" font-size="13.00">timezone</text>
+</g>
+<!-- users -->
+<g id="node4" class="node">
+<title>users</title>
+<polygon fill="none" stroke="black" points="33.64,-235 33.64,-339.4 126.48,-339.4 126.48,-235 33.64,-235"/>
+<polygon fill="#dddddd" stroke="none" points="34.64,-312.8 34.64,-338.4 125.48,-338.4 125.48,-312.8 34.64,-312.8"/>
+<text xml:space="preserve" text-anchor="start" x="62.72" y="-322.7" font-family="Arial" font-weight="bold" font-size="13.00">users</text>
+<text xml:space="preserve" text-anchor="start" x="39.64" y="-294.8" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="103.14" y="-294.8" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="39.64" y="-269.2" font-family="Arial" font-size="13.00">tenant_id</text>
+<text xml:space="preserve" text-anchor="start" x="103.87" y="-269.2" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="39.64" y="-243.6" font-family="Arial" font-size="13.00">email</text>
+</g>
+<!-- audit_events -->
+<g id="node5" class="node">
+<title>audit_events</title>
+<polygon fill="none" stroke="black" points="213.42,-222.2 213.42,-352.2 331.53,-352.2 331.53,-222.2 213.42,-222.2"/>
+<polygon fill="#dddddd" stroke="none" points="214.42,-325.6 214.42,-351.2 330.53,-351.2 330.53,-325.6 214.42,-325.6"/>
+<text xml:space="preserve" text-anchor="start" x="232.74" y="-335.5" font-family="Arial" font-weight="bold" font-size="13.00">audit_events</text>
+<text xml:space="preserve" text-anchor="start" x="219.42" y="-307.6" font-family="Arial" font-size="13.00">id</text>
+<text xml:space="preserve" text-anchor="start" x="308.19" y="-307.6" font-family="Arial" font-size="13.00">PK</text>
+<text xml:space="preserve" text-anchor="start" x="219.42" y="-282" font-family="Arial" font-size="13.00">tenant_id</text>
+<text xml:space="preserve" text-anchor="start" x="308.92" y="-282" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="219.42" y="-256.4" font-family="Arial" font-size="13.00">actor_id ?</text>
+<text xml:space="preserve" text-anchor="start" x="308.92" y="-256.4" font-family="Arial" font-size="13.00">FK</text>
+<text xml:space="preserve" text-anchor="start" x="219.42" y="-230.8" font-family="Arial" font-size="13.00">resource_id ?</text>
+</g>
+<!-- users&#45;&gt;audit_events -->
+<g id="edge1" class="edge">
+<title>users&#45;&gt;audit_events</title>
+<path fill="none" stroke="#555555" stroke-width="1.1" d="M137.61,-287.2C156.54,-287.2 177.93,-287.2 197.97,-287.2"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="126.99,-291.2 126.99,-283.2 128.59,-283.2 128.59,-291.2 126.99,-291.2"/>
+<polyline fill="none" stroke="#555555" stroke-width="1.1" points="126.19,-287.2 130.19,-287.2"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="133.94" cy="-287.2" rx="3.2" ry="3.2"/>
+<polygon fill="#555555" stroke="#555555" stroke-width="1.1" points="205.3,-287.2 213.3,-290.8 209.67,-287.2 212.93,-287.2 212.93,-287.2 212.93,-287.2 209.67,-287.2 213.3,-283.6 205.3,-287.2"/>
+<ellipse fill="none" stroke="#555555" stroke-width="1.1" cx="200.21" cy="-287.2" rx="3.2" ry="3.2"/>
+</g>
+<!-- password_reset_tokens -->
+<g id="node6" class="node">
+<title>password_reset_tokens</title>
+<polygon fill="none" stroke="black" points="0,-365.8 0,-444.6 160.12,-444.6 160.12,-365.8 0,-365.8"/>
+<polygon fill="#dddddd" stroke="none" points="1,-418 1,-443.6 159.12,-443.6 159.12,-418 1,-418"/>
+<text xml:space="preserve" text-anchor="start" x="6" y="-427.9" font-family="Arial" font-weight="bold" font-size="13.00">password_reset_tokens</text>
+<text xml:space="preserve" text-anchor="start" x="6" y="-400" font-family="Arial" font-size="13.00">tenant_id</text>
+<text xml:space="preserve" text-anchor="start" x="116.56" y="-400" font-family="Arial" font-size="13.00">PK/FK</text>
+<text xml:space="preserve" text-anchor="start" x="6" y="-374.4" font-family="Arial" font-size="13.00">email</text>
+<text xml:space="preserve" text-anchor="start" x="136.78" y="-374.4" font-family="Arial" font-size="13.00">PK</text>
+</g>
+</g>
+</svg><text x="32" y="675" class="small" text-anchor="start">Key projection: full types, attributes and every composite FK are in the dictionary.</text><text x="32" y="699" class="small" text-anchor="start">PK = primary key; FK = foreign key; ? = nullable; circle = optional; crow = many.</text><text x="32" y="723" class="small" text-anchor="start">Tenant ownership edges outside this module are omitted; no relationship is inferred.</text></svg>

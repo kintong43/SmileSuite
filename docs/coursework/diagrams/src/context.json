@@ -1,0 +1,91 @@
+{
+  "system": "SmileSuite",
+  "processes": [
+    {
+      "id": "0",
+      "name": "SmileSuite"
+    }
+  ],
+  "stores": [],
+  "entities": [
+    "Patient",
+    "Clinic staff",
+    "Clinic owner",
+    "Platform administrator",
+    "Directus CMS",
+    "Stripe / Shopify",
+    "Email delivery"
+  ],
+  "flows": [
+    [
+      "Patient",
+      "0",
+      "Account, booking and intake details"
+    ],
+    [
+      "0",
+      "Patient",
+      "Appointments, content and status"
+    ],
+    [
+      "Clinic staff",
+      "0",
+      "Schedule and care updates"
+    ],
+    [
+      "0",
+      "Clinic staff",
+      "Permitted operational / care views"
+    ],
+    [
+      "Clinic owner",
+      "0",
+      "Clinic and subscription settings"
+    ],
+    [
+      "0",
+      "Clinic owner",
+      "Reports and configuration status"
+    ],
+    [
+      "Platform administrator",
+      "0",
+      "Tenant administration requests"
+    ],
+    [
+      "0",
+      "Platform administrator",
+      "Operational metadata"
+    ],
+    [
+      "Directus CMS",
+      "0",
+      "Published tenant content"
+    ],
+    [
+      "0",
+      "Directus CMS",
+      "Staff directory / aggregate projections"
+    ],
+    [
+      "Stripe / Shopify",
+      "0",
+      "Provider events / catalog responses"
+    ],
+    [
+      "0",
+      "Stripe / Shopify",
+      "Subscription / cart requests"
+    ],
+    [
+      "0",
+      "Email delivery",
+      "Minimal appointment notices"
+    ],
+    [
+      "Email delivery",
+      "0",
+      "Delivery result"
+    ]
+  ]
+}

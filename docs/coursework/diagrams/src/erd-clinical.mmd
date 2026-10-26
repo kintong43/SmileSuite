@@ -1,0 +1,11 @@
+erDiagram
+    patient_profiles ||--o{ appointments : "tenant_id+patient_id"
+    appointments |o--o{ care_assignments : "tenant_id+appointment_id+patient_id"
+    patient_profiles ||--o{ care_assignments : "tenant_id+patient_id"
+    appointments ||--o{ clinical_notes : "tenant_id+appointment_id+patient_id"
+    patient_profiles ||--o{ clinical_notes : "tenant_id+patient_id"
+    clinical_notes |o--o{ clinical_notes : "tenant_id+supersedes_id+patient_id"
+    patient_profiles ||--o{ consent_records : "tenant_id+patient_id"
+    appointments |o--o{ intake_submissions : "tenant_id+appointment_id+patient_id"
+    patient_profiles ||--o{ intake_submissions : "tenant_id+patient_id"
+    intake_submissions |o--o{ intake_submissions : "tenant_id+supersedes_id+patient_id"

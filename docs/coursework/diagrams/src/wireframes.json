@@ -1,0 +1,182 @@
+{
+  "device": "Desktop; 864 px figure abstraction",
+  "screens": [
+    {
+      "id": "SCR-01",
+      "name": "wireframe-login",
+      "title": "Sign in",
+      "role": "Clinic account",
+      "route": "/login",
+      "fr": "FR-01 / FR-02",
+      "auth": true,
+      "heading": "Welcome back.",
+      "fields": [
+        "Email address",
+        "Password"
+      ],
+      "buttons": [
+        "Sign in"
+      ],
+      "notes": [
+        "Forgot password?",
+        "Create a patient account",
+        "Local demo access: Clinic owner / Reception / Practitioner / Patient"
+      ]
+    },
+    {
+      "id": "SCR-02",
+      "name": "wireframe-dashboard",
+      "title": "Overview",
+      "role": "Clinic staff",
+      "route": "/dashboard",
+      "fr": "FR-03 / FR-09",
+      "heading": "A good day for great care.",
+      "cards": [
+        "Today’s appointments",
+        "Patient community",
+        "Visits completed",
+        "Scheduled value"
+      ],
+      "table": [
+        "Today’s appointments",
+        "Patient | Time | Service | Practitioner | Status"
+      ],
+      "buttons": [
+        "New appointment"
+      ],
+      "notes": [
+        "Scheduled value is not collected revenue."
+      ]
+    },
+    {
+      "id": "SCR-03",
+      "name": "wireframe-booking",
+      "title": "Book an appointment",
+      "role": "Clinic account",
+      "route": "/appointments/create",
+      "fr": "FR-03 / FR-04",
+      "heading": "A visit worth making time for.",
+      "fields": [
+        "Patient",
+        "Service",
+        "Practitioner",
+        "Chair",
+        "Preferred date"
+      ],
+      "buttons": [
+        "Confirm appointment"
+      ],
+      "notes": [
+        "MAKE IT YOUR TIME · clinic timezone",
+        "Empty state: No slots available for the selected date.",
+        "Conflict state: The time filled up. Choose another slot.",
+        "Pay directly at the clinic"
+      ]
+    },
+    {
+      "id": "SCR-04",
+      "name": "wireframe-profile",
+      "title": "Profile",
+      "role": "Clinic account",
+      "route": "/profile",
+      "fr": "FR-02",
+      "heading": "Your profile",
+      "fields": [
+        "Name",
+        "Email address",
+        "Current password",
+        "First name / Last name / Phone (linked patient only)"
+      ],
+      "buttons": [
+        "Save profile",
+        "Change password"
+      ],
+      "notes": [
+        "Password change: Current password / Password / Confirm password",
+        "Email change requires the current password."
+      ]
+    },
+    {
+      "id": "SCR-05",
+      "name": "wireframe-reports",
+      "title": "Reports",
+      "role": "Owner / receptionist",
+      "route": "/reports",
+      "fr": "FR-10",
+      "heading": "Clinic reports",
+      "fields": [
+        "From date",
+        "To date"
+      ],
+      "cards": [
+        "Appointments",
+        "Completed visits",
+        "Cancellation / no-show counts",
+        "Scheduled value by currency"
+      ],
+      "table": [
+        "Status and service summaries",
+        "Aggregate counts | Date range | Service"
+      ],
+      "buttons": [
+        "Apply filters",
+        "Export CSV"
+      ],
+      "notes": [
+        "No patient names, clinical text or collected-revenue claim."
+      ]
+    },
+    {
+      "id": "SCR-06",
+      "name": "wireframe-content",
+      "title": "Public content",
+      "role": "Public visitor",
+      "route": "/about /features /announcements /content/{slug}",
+      "fr": "FR-08 / FR-11",
+      "public": true,
+      "heading": "Published clinic content",
+      "cards": [
+        "About",
+        "Features",
+        "Announcements"
+      ],
+      "table": [
+        "Published content",
+        "Title | Summary | Body"
+      ],
+      "buttons": [
+        "Sign in",
+        "Create a patient account"
+      ],
+      "notes": [
+        "Only published content for the resolved tenant.",
+        "CMS unavailable: show an honest unavailable or empty state."
+      ]
+    },
+    {
+      "id": "SCR-07",
+      "name": "wireframe-cms",
+      "title": "Content & CMS",
+      "role": "Clinic owner",
+      "route": "/cms",
+      "fr": "FR-11",
+      "heading": "Content & CMS",
+      "cards": [
+        "CMS connection status",
+        "Public content links",
+        "Safe projection status"
+      ],
+      "table": [
+        "CMS collections",
+        "Pages | Announcements | Services | Staff directory | Aggregate reports"
+      ],
+      "buttons": [
+        "Open Directus"
+      ],
+      "notes": [
+        "Separate CMS login with tenant-scoped permissions.",
+        "Patient records remain in Laravel."
+      ]
+    }
+  ]
+}

@@ -4,30 +4,30 @@ Sources read in full: `FINAL PROJECT REQUIREMENTS.docx` (Web Systems and Technol
 
 ## Final project
 
-| Requirement | Baseline finding | Work in this alignment |
+| Requirement | Baseline finding | Implemented evidence |
 | --- | --- | --- |
-| Business proposal: problem, users, value, revenue | System plan describes SaaS business; no dedicated course proposal | Prepare concise proposal grounded in SmileSuite; prices remain unapproved |
-| Responsive public/user website with overview, products/services, features | Landing and authenticated services/store/portal exist | Add explicit public content pages via CMS and improve navigation |
-| Registration, login, profile management | Authentication exists; self-profile management absent | Implement profile and credential management |
-| At least three major modules | Scheduling, clinical intake/notes, commerce, billing, clinic configuration | Preserve and document existing modules |
-| Actual CMS platform for content, announcements, products/services, user data, reports | Custom Laravel admin exists; it is not a CMS-platform integration | Add Directus with public content and safe operational projections |
-| System integration | Stripe/Shopify clients with fixtures, queued email; live gates disabled | Add verifiable local Directus HTTP integration; do not claim live provider proof |
-| Five relational tables and ERD | More than five tables, tenant composite constraints; no course ERD deliverable | Derive schema, dictionary and ERDs from real PostgreSQL schema |
-| Authentication/authorization/password protection/validation/sessions | Implemented and tested | Regression-check new boundaries; passwords remain hashed |
-| Administrator/customer roles, content/users/reports/profile | Multiple roles and staff management; reports/profile/content gaps | Add report/profile/CMS views and documented permission boundaries |
-| SRS and design documents | System plan/evidence exist; course-specific set absent | Add SRS, use case, context, architecture, ERD, schema and wireframes |
+| Business proposal: problem, users, value, revenue | No dedicated course proposal | [Business proposal](BUSINESS_PROPOSAL.md); commercial prices remain unapproved |
+| Responsive public/user website with overview, products/services, features | Landing and authenticated services/store/portal existed | CMS-backed About, Features, Announcements & services; public navigation and browser checks |
+| Registration, login, profile management | Self-profile management absent | [Profile and credential management](PROFILE.md), with password checks, verification and session/reset-link revocation |
+| At least three major modules | Scheduling, clinical intake/notes, commerce, billing, clinic configuration | Existing modules retained; reports and CMS added; [SRS](SRS.md) maps requirements |
+| Actual CMS platform for content, announcements, products/services, user data, reports | Custom Laravel admin alone did not satisfy platform integration | [Directus 11.17.4](CMS.md), five collections, separate editor identities; user data represented by safe staff display-name/role directory; patient and credential data remain in Laravel |
+| System integration | Existing Stripe/Shopify fixtures and queued email | Executed real local Directus REST and browser publishing/isolation checks; no live payment/store claim |
+| Five relational tables and ERD | No course ERD deliverable | [Schema/dictionary](DATABASE_SCHEMA.md), 41 actual tables, 70 physical foreign keys, eight domain ERDs |
+| Authentication/authorization/password protection/validation/sessions | Existing framework/application controls | Full regression plus new scope, role, profile, reset-token and password-attempt tests; [verification](VERIFICATION.md) |
+| Administrator/customer roles, content/users/reports/profile | Reports/profile/content gaps | Owner/staff/patient roles, separate CMS editors and platform operators; aggregate reports and profile screens |
+| SRS and design documents | Course-specific set absent | [SRS](SRS.md), [system design](SYSTEM_DESIGN.md), proposal, schema, 20 figures, [demo guide](DEMO_GUIDE.md) |
 
 ## Git lab
 
 | Part | Verified baseline / requirement |
 | --- | --- |
 | 1 | Project folder and initialized local Git exist |
-| 2 | README and .gitignore exist; student name and course/section require confirmation |
+| 2 | README includes Kenji B. Rique, Samuael D. Luz, BSIT III F1, description and technology stack; .gitignore excludes credentials and local/generated files |
 | 3 | Published initial commit `26e3a86` exists |
-| 4 | Missing three feature branches; implement three new actual features with two commits each |
-| 5 | PDF says "both" branches after requiring at least three; merge all three to meet the stronger consistent interpretation |
+| 4 | Three genuine feature branches, at least two implementation commits each; exact commits in [Git evidence](GIT_LAB_EVIDENCE.md) |
+| 5 | All three feature branches merged locally into main; PDF's inconsistent "both" wording is resolved by merging all three |
 | 6 | Current remote is `kintong43/SmileSuite`; prescribed name is `ITE311_FINAL-PROJECT_SECTION_LastName_FirstName_` and needs the student's details plus a rename/new-repo decision |
 | 7 | Initial main was pushed; new feature branches and merged main require a later authorized push |
 | 8 | Instructor GitHub username not provided; invitation not sent or claimed |
 
-The student name cannot safely be inferred from Git's configured author. Course titles in the final requirements and the Git lab's ITE311 repository prefix are recorded as written rather than silently reconciled.
+Both student names and the section were supplied by the user. The instructor has not supplied a GitHub username. Course titles and the Git lab's ITE311 repository prefix are recorded as written. The current `SmileSuite` repository name has been preserved; a conforming individual/group name needs the student's decision. Local implementation and passing checks do not establish that the new work has been uploaded or that an invitation was sent.
