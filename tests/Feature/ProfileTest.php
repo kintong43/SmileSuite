@@ -69,6 +69,22 @@ class ProfileTest extends TestCase
     {
         $user = $this->account();
         $this->post('http://harbor.smilesuite.localhost/profile', ['name' => 'Guest'])->assertRedirect('/login');
-        $this->actingAs($user)->post('http://cedar.smilesuite.localhost/profile',['name' => 'Cross clinic'])->assertForbidden();
+        $this->actingAs($user)->post('http://cedar.smilesuite.localhost/profile', ['name' => 'Cross clinic'])->assertForbidden();
+    }
+
+    public function test_profile_page_shows_own_contact_and_password_forms(): void
+    {
+        $user = $this->account();
+        $this->actingAs($user)->get('http://harbor.smilesuite.localhost/profile')->assertOk()->assertSee('My profile')->assertSee($user->email)->assertSee('Change password')->assertDontSee('owner@cedar.example.test');
+    }
+
+    public function test_password_change_invalidates_an_existing_reset_link(): void
+    {
+        $user = $this->account();
+        DB::table('password_reset_tokens')->insert(['tenant_id' => $user->tenant_id, 'email' => $user->email, 'token' => Hash::make('old-reset-token'), 'created_at' => now()]);
+        $this->actingAs($user)->post('http://harbor.smilesuite.localhost/profile/password', ['current_password' => 'SmileSuite-demo-2026!', 'password' => 'Changed-password-2026!', 'password_confirmation' => 'Changed-password-2026!'])->assertRedirect('/login');
+        $this->assertDatabaseMissing('password_reset_tokens', ['tenant_id' => $user->tenant_id, 'email' => $user->email]);
+        $this->post('http://harbor.smilesuite.localhost/reset-password/old-reset-token', ['email' => $user->email, 'password' => 'Another-password-2026!', 'password_confirmation' => 'Another-password-2026!'])->assertSessionHasErrors();
+        $this->assertTrue(Hash::check('Changed-password-2026!', DB::table('users')->where('id', $user->id)->value('password')));
     }
 }

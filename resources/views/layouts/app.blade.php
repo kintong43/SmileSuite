@@ -22,6 +22,7 @@
         <a class="nav-link" href="/appointments/create"><x-icon name="calendar"/>Book a visit</a>
         @endif
         <div class="nav-label">{{ $staff ? 'CLINIC' : 'MORE' }}</div>
+        <a @class(['nav-link','active'=>request()->is('profile')]) href="{{ route('profile.edit') }}"><x-icon name="users"/>My profile</a>
         <a @class(['nav-link','active'=>request()->is('store*')]) href="/store"><x-icon name="bag"/>Clinic store<span class="nav-tag">SHOP</span></a>
         @if(auth()->user()->hasRole('owner'))
         <a @class(['nav-link','active'=>request()->is('billing*')]) href="/billing"><x-icon name="card"/>Subscription</a>

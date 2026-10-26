@@ -16,9 +16,15 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    public function edit(Request $request): View
+    {
+        return view('profile', ['account' => $request->user(), 'patient' => PatientProfile::where('user_id', $request->user()->id)->first()]);
+    }
+
     public function update(Request $request): RedirectResponse
     {
         $actor = $request->user();
@@ -72,6 +78,7 @@ class ProfileController extends Controller
         DB::transaction(function () use ($actor, $data): void {
             $user = User::whereKey($actor->id)->lockForUpdate()->firstOrFail();
             $user->forceFill(['password' => Hash::make($data['password']), 'remember_token' => Str::random(60)])->save();
+            DB::table('password_reset_tokens')->where('tenant_id', $user->tenant_id)->where('email', $user->email)->delete();
             DB::table('sessions')->where('user_id', $user->id)->delete();
             AuditEvent::create(['actor_id' => $user->id, 'action' => 'profile.password_changed', 'resource_type' => 'user', 'resource_id' => $user->id, 'metadata' => [], 'occurred_at' => now()]);
         });
@@ -79,6 +86,6 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login')->with('success','Password updated. Sign in again. Other sessions have been revoked.');
+        return redirect('/login')->with('success', 'Password updated. Sign in again. Other sessions have been revoked.');
     }
 }

@@ -40,6 +40,7 @@ Route::middleware('clinic')->group(function () {
         Route::post('/email/verification-notification', [OnboardingController::class, 'verification'])->middleware('throttle:5,1');
         Route::get('/email/verify/{user}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
         Route::middleware('mfa')->group(function () {
+            Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
             Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
             Route::post('/profile/password', [ProfileController::class, 'password'])->middleware('throttle:mfa')->name('profile.password');
             Route::get('/dashboard', [DashboardController::class, 'index']);
