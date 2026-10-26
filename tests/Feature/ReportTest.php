@@ -93,6 +93,17 @@ class ReportTest extends TestCase
         });
     }
 
+    public function test_historical_currency_is_not_added_to_the_current_currency_total(): void
+    {
+        $tenant = $this->clinic();
+        $this->appointment($tenant, '2026-10-27T01:00:00Z', 'completed', 50000);
+        $tenant->update(['currency' => 'USD']);
+        $report = app(TenantRunner::class)->run($tenant, fn (): array => app(OperationalReportService::class)->generate('2026-10-27', '2026-10-27'));
+        $this->assertSame('USD', $report['currency']);
+        $this->assertSame(0, $report['totals']['scheduled_value_minor']);
+        $this->assertSame([['currency' => 'PHP', 'scheduled_value_minor' => 50000]], $report['scheduled_value_by_currency']);
+    }
+
     public function test_dst_day_includes_both_repeated_hours_and_excludes_next_local_midnight(): void
     {
         $tenant = $this->clinic('dst-reports', 'America/New_York');

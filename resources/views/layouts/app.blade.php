@@ -17,6 +17,9 @@
         <a @class(['nav-link','active'=>request()->is('patients*')]) href="/patients"><x-icon name="users"/>Patients</a>
         <a @class(['nav-link','active'=>request()->is('services')]) href="/services"><x-icon name="spark"/>Services</a>
         <a @class(['nav-link','active'=>request()->is('notifications*')]) href="/notifications"><x-icon name="mail"/>Notifications</a>
+        @if(auth()->user()->hasRole('owner','receptionist'))
+        <a @class(['nav-link','active'=>request()->is('reports*')]) href="{{ route('reports.index') }}"><x-icon name="grid"/>Reports</a>
+        @endif
         @else
         <a @class(['nav-link','active'=>request()->is('portal')]) href="/portal"><x-icon name="grid"/>My appointments</a>
         <a class="nav-link" href="/appointments/create"><x-icon name="calendar"/>Book a visit</a>
