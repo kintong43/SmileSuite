@@ -1,0 +1,97 @@
+name: smilesuite
+
+x-application: &application
+  image: smilesuite:local
+  build: .
+  restart: unless-stopped
+  environment: &application-environment
+    APP_NAME: SmileSuite
+    APP_ENV: production
+    APP_DEBUG: "false"
+    APP_KEY: ${APP_KEY:?Provide a persistent APP_KEY through the deployment environment}
+    APP_URL: ${DEPLOY_APP_URL:?Provide the HTTPS platform URL}
+    TENANCY_DOMAIN: ${DEPLOY_TENANCY_DOMAIN:?Provide the platform base domain}
+    PLATFORM_HOSTS: ${DEPLOY_PLATFORM_HOSTS:?Provide the platform and administrator hosts}
+    ADMIN_HOST: ${DEPLOY_ADMIN_HOST:?Provide the administrator host}
+    SMILESUITE_SANDBOX: "false"
+    LIVE_BILLING_ENABLED: "false"
+    LIVE_COMMERCE_ENABLED: "false"
+    REAL_PATIENT_DATA_ENABLED: "false"
+    DB_CONNECTION: pgsql
+    DB_HOST: postgres
+    DB_PORT: "5432"
+    DB_DATABASE: smilesuite
+    DB_USERNAME: smilesuite
+    DB_PASSWORD: ${COMPOSE_DB_PASSWORD:?Provide a unique database password}
+    DB_URL: ""
+    REDIS_CLIENT: predis
+    REDIS_HOST: redis
+    REDIS_PORT: "6379"
+    REDIS_PASSWORD: ${COMPOSE_REDIS_PASSWORD:?Provide a unique Redis password}
+    REDIS_PREFIX: ${DEPLOY_REDIS_PREFIX:-smilesuite-production-}
+    CACHE_PREFIX: ${DEPLOY_CACHE_PREFIX:-smilesuite-production-cache-}
+    SESSION_DRIVER: redis
+    SESSION_ENCRYPT: "true"
+    SESSION_DOMAIN: "null"
+    SESSION_SECURE_COOKIE: "true"
+    SESSION_HTTP_ONLY: "true"
+    SESSION_SAME_SITE: lax
+    CACHE_STORE: redis
+    QUEUE_CONNECTION: redis
+    LOG_CHANNEL: stderr
+    LOG_LEVEL: warning
+    MAIL_MAILER: log
+  volumes:
+    - private-storage:/var/www/html/storage
+  depends_on:
+    postgres:
+      condition: service_healthy
+    redis:
+      condition: service_healthy
+
+services:
+  app:
+    <<: *application
+    ports:
+      - "127.0.0.1:${COMPOSE_HTTP_PORT:-8080}:80"
+  queue:
+    <<: *application
+    user: www-data
+    command: ["php", "artisan", "queue:work", "redis", "--sleep=3", "--tries=3", "--timeout=60", "--max-time=3600"]
+    stop_grace_period: 120s
+  scheduler:
+    <<: *application
+    user: www-data
+    command: ["php", "artisan", "schedule:work"]
+  postgres:
+    image: postgres:16-bookworm
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: smilesuite
+      POSTGRES_USER: smilesuite
+      POSTGRES_PASSWORD: ${COMPOSE_DB_PASSWORD:?Provide a unique database password}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U smilesuite -d smilesuite"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  redis:
+    image: redis:7.4-bookworm
+    restart: unless-stopped
+    environment:
+      REDIS_PASSWORD: ${COMPOSE_REDIS_PASSWORD:?Provide a unique Redis password}
+    command: ["sh", "-c", "exec redis-server --appendonly yes --requirepass \"$$REDIS_PASSWORD\""]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "REDISCLI_AUTH=\"$$REDIS_PASSWORD\" redis-cli ping | grep -q PONG"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  private-storage:
+  postgres-data:
+  redis-data:
