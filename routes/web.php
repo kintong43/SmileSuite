@@ -7,6 +7,7 @@ use App\Http\Controllers\CareAssignmentController;
 use App\Http\Controllers\ClinicalController;
 use App\Http\Controllers\ClinicSettingsController;
 use App\Http\Controllers\CommerceController;
+use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OnboardingController;
@@ -17,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 require __DIR__.'/platform.php';
 
 Route::get('/', [OnboardingController::class, 'landing']);
+Route::get('/about', [ContentController::class, 'page'])->defaults('slug', 'about')->name('content.about');
+Route::get('/features', [ContentController::class, 'page'])->defaults('slug', 'features')->name('content.features');
+Route::get('/announcements', [ContentController::class, 'announcements'])->name('content.announcements');
+Route::get('/content/{slug}', [ContentController::class, 'page'])->where('slug', '[a-z0-9-]{1,100}')->name('content.page');
 Route::get('/onboarding', [OnboardingController::class, 'clinicForm']);
 Route::post('/onboarding', [OnboardingController::class, 'clinic'])->middleware('throttle:login');
 Route::post('/webhooks/stripe', [BillingController::class, 'webhook'])->middleware('throttle:120,1');
@@ -41,10 +46,11 @@ Route::middleware('clinic')->group(function () {
         Route::post('/email/verification-notification', [OnboardingController::class, 'verification'])->middleware('throttle:5,1');
         Route::get('/email/verify/{user}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
         Route::middleware('mfa')->group(function () {
+            Route::get('/cms', [ContentController::class, 'dashboard'])->name('cms.index');
             Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
             Route::get('/reports/export', [ReportController::class, 'export'])->name('reports.export');
             Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-            Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+            Route::post('/profile', [ProfileController::class, 'update'])->middleware('throttle:mfa')->name('profile.update');
             Route::post('/profile/password', [ProfileController::class, 'password'])->middleware('throttle:mfa')->name('profile.password');
             Route::get('/dashboard', [DashboardController::class, 'index']);
             Route::get('/schedule', [DashboardController::class, 'schedule']);

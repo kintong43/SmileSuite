@@ -44,6 +44,7 @@ class ProfileController extends Controller
             $user = User::whereKey($actor->id)->lockForUpdate()->firstOrFail();
             $user->name = $data['name'];
             if ($emailChanging) {
+                DB::table('password_reset_tokens')->where('tenant_id', $user->tenant_id)->where('email', $user->email)->delete();
                 $user->email = $data['email'];
                 $user->email_verified_at = null;
                 $user->remember_token = Str::random(60);
