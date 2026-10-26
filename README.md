@@ -1,5 +1,9 @@
 # SmileSuite
 
+**Students:** Kenji B. Rique and Samuael D. Luz  
+**Program / Year / Section:** Bachelor of Science in Information Technology (BSIT), III F1  
+**Courses:** Web Systems and Technologies 2; System Integration and Architecture 1
+
 SmileSuite is a local, synthetic-data MVP for independent dental clinics: clinic accounts, scheduling, versioned intake and encounter notes, tenant billing, and optional clinic-owned Shopify storefronts. It uses Laravel 13, PHP 8.4, PostgreSQL 16, Blade, Alpine, Tailwind and Vite. The dependency lockfiles are the installed version record.
 
 This implementation is for development and review. It does not establish production readiness, regulatory approval, approved prices, or permission to use real patient data. Live billing, live commerce and real-patient-data flags default to disabled. See [the revised system plan](docs/smilesuite_system_plan_v2.md), particularly its Section 12 decision register, and [implementation evidence](docs/IMPLEMENTATION.md).

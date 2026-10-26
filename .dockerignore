@@ -5,6 +5,7 @@
 .codex
 .agents
 node_modules
+**/node_modules
 vendor
 public/build
 public/hot
