@@ -1,0 +1,6 @@
+/uploads/
+/extensions/
+/database/
+.env
+.env.*
+!.env.example
