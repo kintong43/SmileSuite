@@ -43,10 +43,13 @@ class ProfileTest extends TestCase
         Mail::fake();
         $user = $this->account();
         $payload = ['name' => $user->name, 'email' => 'new-address@example.test', 'first_name' => 'Alex', 'last_name' => 'Example'];
+        $previousEmail = $user->email;
+        DB::table('password_reset_tokens')->insert(['tenant_id' => $user->tenant_id, 'email' => $previousEmail, 'token' => Hash::make('old-email-token'), 'created_at' => now()]);
         $this->actingAs($user)->post('http://harbor.smilesuite.localhost/profile', $payload)->assertSessionHasErrors('current_password');
         $this->post('http://harbor.smilesuite.localhost/profile', $payload + ['current_password' => 'SmileSuite-demo-2026!'])->assertRedirect('/profile');
         $this->assertDatabaseHas('users', ['id' => $user->id, 'email' => 'new-address@example.test', 'email_verified_at' => null]);
         $this->assertDatabaseHas('patient_profiles', ['user_id' => $user->id, 'email' => 'new-address@example.test']);
+        $this->assertDatabaseMissing('password_reset_tokens', ['tenant_id' => $user->tenant_id, 'email' => $previousEmail]);
     }
 
     public function test_duplicate_same_clinic_email_is_rejected_but_other_clinic_email_is_independent(): void
@@ -86,5 +89,16 @@ class ProfileTest extends TestCase
         $this->assertDatabaseMissing('password_reset_tokens', ['tenant_id' => $user->tenant_id, 'email' => $user->email]);
         $this->post('http://harbor.smilesuite.localhost/reset-password/old-reset-token', ['email' => $user->email, 'password' => 'Another-password-2026!', 'password_confirmation' => 'Another-password-2026!'])->assertSessionHasErrors();
         $this->assertTrue(Hash::check('Changed-password-2026!', DB::table('users')->where('id', $user->id)->value('password')));
+    }
+
+    public function test_email_password_guesses_are_rate_limited(): void
+    {
+        $user = $this->account();
+        $this->actingAs($user);
+        $payload = ['name' => $user->name, 'email' => 'changed@example.test', 'first_name' => 'Alex', 'last_name' => 'Example', 'current_password' => 'wrong-password'];
+        for ($attempt = 0; $attempt < 5; $attempt++) {
+            $this->postJson('http://harbor.smilesuite.localhost/profile', $payload)->assertUnprocessable();
+        }
+        $this->postJson('http://harbor.smilesuite.localhost/profile', $payload)->assertTooManyRequests();
     }
 }

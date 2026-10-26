@@ -1,0 +1,39 @@
+services:
+  cms-db:
+    image: postgres:16-bookworm
+    environment:
+      POSTGRES_DB: smilesuite_cms
+      POSTGRES_USER: smilesuite_cms
+      POSTGRES_PASSWORD: ${CMS_DB_PASSWORD:?Set CMS_DB_PASSWORD}
+    volumes:
+      - cms-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U smilesuite_cms -d smilesuite_cms]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+  directus:
+    image: directus/directus:11.17.4
+    ports:
+      - 127.0.0.1:8055:8055
+    depends_on:
+      cms-db:
+        condition: service_healthy
+    environment:
+      SECRET: ${CMS_SECRET:?Set CMS_SECRET}
+      ADMIN_EMAIL: ${CMS_ADMIN_EMAIL:?Set CMS_ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${CMS_ADMIN_PASSWORD:?Set CMS_ADMIN_PASSWORD}
+      DB_CLIENT: pg
+      DB_HOST: cms-db
+      DB_PORT: 5432
+      DB_DATABASE: smilesuite_cms
+      DB_USER: smilesuite_cms
+      DB_PASSWORD: ${CMS_DB_PASSWORD}
+      PUBLIC_URL: http://127.0.0.1:8055
+      TELEMETRY: "false"
+      WEBSOCKETS_ENABLED: "false"
+    volumes:
+      - cms-uploads:/directus/uploads
+volumes:
+  cms-data:
+  cms-uploads:

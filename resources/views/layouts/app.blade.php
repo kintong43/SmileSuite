@@ -28,6 +28,7 @@
         <a @class(['nav-link','active'=>request()->is('profile')]) href="{{ route('profile.edit') }}"><x-icon name="users"/>My profile</a>
         <a @class(['nav-link','active'=>request()->is('store*')]) href="/store"><x-icon name="bag"/>Clinic store<span class="nav-tag">SHOP</span></a>
         @if(auth()->user()->hasRole('owner'))
+        <a @class(['nav-link','active'=>request()->is('cms')]) href="{{ route('cms.index') }}"><x-icon name="spark"/>Content management</a>
         <a @class(['nav-link','active'=>request()->is('billing*')]) href="/billing"><x-icon name="card"/>Subscription</a>
         <a @class(['nav-link','active'=>request()->is('settings*')]) href="/settings"><x-icon name="settings"/>Settings</a>
         @endif

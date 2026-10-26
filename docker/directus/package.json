@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "directus": "11.17.4",
+    "pg": "8.23.1"
+  },
+  "name": "smilesuite-directus",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  }
+}
