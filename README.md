@@ -19,16 +19,16 @@ The course alignment adds self-service profiles and password changes, role-gated
 - [CMS setup and real integration evidence](docs/coursework/CMS.md)
 - [Demonstration guide](docs/coursework/DEMO_GUIDE.md), [verification](docs/coursework/VERIFICATION.md), and [Git lab evidence](docs/coursework/GIT_LAB_EVIDENCE.md)
 
-The instructor's GitHub username has not been provided. The collaborator invitation is pending. The remote repository is currently named `SmileSuite`; the Git lab's prescribed repository name is a separate pending submission step.
+The instructor's GitHub username has not been provided. The collaborator invitation is pending. The repository uses the student-selected group name `SmileSuite_ITE311_FINAL-PROJECT_IIIF1_Rique_Luz_`.
 
 ## Clone and run
 
-For the prepared repository's first upload, see [GitHub handoff](docs/GITHUB.md).
+For repository and upload details, see [GitHub handoff](docs/GITHUB.md).
 
 Prerequisites: PHP 8.4 with `pdo_pgsql`, `intl`, `mbstring`, `zip` and `bcmath`; Composer 2; Node 24; and PostgreSQL 16 with `btree_gist` available. The repository includes application source and lockfiles. Install dependencies locally after cloning.
 
 ```sh
-git clone https://github.com/kintong43/SmileSuite.git
+git clone https://github.com/kintong43/SmileSuite_ITE311_FINAL-PROJECT_IIIF1_Rique_Luz_.git SmileSuite
 cd SmileSuite
 composer install
 npm ci

@@ -26,8 +26,8 @@ Sources read in full: `FINAL PROJECT REQUIREMENTS.docx` (Web Systems and Technol
 | 3 | Published initial commit `26e3a86` exists |
 | 4 | Three genuine feature branches, at least two implementation commits each; exact commits in [Git evidence](GIT_LAB_EVIDENCE.md) |
 | 5 | All three feature branches merged locally into main; PDF's inconsistent "both" wording is resolved by merging all three |
-| 6 | Current remote is `kintong43/SmileSuite`; prescribed name is `ITE311_FINAL-PROJECT_SECTION_LastName_FirstName_` and needs the student's details plus a rename/new-repo decision |
-| 7 | Initial main was pushed; new feature branches and merged main require a later authorized push |
+| 6 | Renamed on 31 October 2026 to the student-selected group name `SmileSuite_ITE311_FINAL-PROJECT_IIIF1_Rique_Luz_`; lab's individual template remains `ITE311_FINAL-PROJECT_SECTION_LastName_FirstName_` |
+| 7 | Main and all three feature branches verified on GitHub on 31 October 2026 |
 | 8 | Instructor GitHub username not provided; invitation not sent or claimed |
 
-Both student names and the section were supplied by the user. The instructor has not supplied a GitHub username. Course titles and the Git lab's ITE311 repository prefix are recorded as written. The current `SmileSuite` repository name has been preserved; a conforming individual/group name needs the student's decision. Local implementation and passing checks do not establish that the new work has been uploaded or that an invitation was sent.
+Both student names, section and the exact group repository name were supplied by the user. The instructor has not supplied a GitHub username, so the invitation remains pending. Course titles and the Git lab's individual naming template are recorded as written; instructor acceptance of the selected group variation has not been independently established. Repository and branch upload status was checked directly on GitHub, separately from local application tests.

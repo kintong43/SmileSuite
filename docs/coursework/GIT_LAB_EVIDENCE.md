@@ -1,8 +1,8 @@
 # Git lab evidence and upload checklist
 
 **Students:** Kenji B. Rique and Samuael D. Luz — BSIT III F1  
-**Repository:** [kintong43/SmileSuite](https://github.com/kintong43/SmileSuite)  
-**Checked:** 27 October 2026
+**Repository:** [kintong43/SmileSuite_ITE311_FINAL-PROJECT_IIIF1_Rique_Luz_](https://github.com/kintong43/SmileSuite_ITE311_FINAL-PROJECT_IIIF1_Rique_Luz_)  
+**Checked:** 31 October 2026
 
 The original published history is preserved. These are real new implementations and local merge commits, not fabricated historical work. The README names both students, section, project, description and technologies. `.gitignore` excludes local credentials, runtimes, installed dependencies, databases, compiled assets, logs and test output.
 
@@ -13,8 +13,8 @@ The original published history is preserved. These are real new implementations 
 | Initial commit | `26e3a86` — Initial SmileSuite application; already published by the student |
 | Three feature branches, two commits each | Exact implementation commits below; verified count is **2 / 2 / 2** |
 | Merge feature branches | All three are merged into local `main` with preserved merge commits |
-| Prescribed GitHub name | **Pending** — current name is `SmileSuite`; lab specifies `ITE311_FINAL-PROJECT_SECTION_LastName_FirstName_` |
-| Push main and all feature branches | **Pending for this new work** — remote main still points to `26e3a86`; no remote feature branches were listed by `git ls-remote` |
+| Repository name | **Renamed as selected by the student** — `SmileSuite_ITE311_FINAL-PROJECT_IIIF1_Rique_Luz_`; the lab's individual-name template remains recorded below |
+| Push main and all feature branches | **Verified uploaded** — `git ls-remote` confirmed main at `d471239` and all three feature heads at the commits listed below before the rename documentation update |
 | Invite instructor | **Pending** — instructor GitHub username has not been supplied; no invitation sent |
 
 ## Actual implementation history
@@ -39,7 +39,7 @@ git rev-list --count c1f52a2..feature/cms-integration
 
 ## Upload the prepared work
 
-From `C:\Projects\SmileSuite`, inspect the status, fetch current remote references and upload all four branches:
+The course implementation is already uploaded. For later changes, from `C:\Projects\SmileSuite`, inspect the status, fetch current remote references and upload the relevant branches:
 
 ```powershell
 git status
@@ -51,6 +51,6 @@ If GitHub reports that the remote advanced, inspect and reconcile those commits 
 
 ## Repository name and instructor access
 
-The course requires `ITE311_FINAL-PROJECT_SECTION_LastName_FirstName_`. The section is III F1, and both students are recorded above. Confirm how the instructor wants a group repository named before choosing which name/section spelling to use. The established `SmileSuite` remote was not silently renamed. If renamed through GitHub, update `origin` to the resulting URL and recheck it with `git remote -v`.
+The course specifies `ITE311_FINAL-PROJECT_SECTION_LastName_FirstName_`. The student selected the group variant `SmileSuite_ITE311_FINAL-PROJECT_IIIF1_Rique_Luz_`, retaining the project title and both surnames. On 31 October 2026, this exact name was applied to the existing GitHub repository, preserving its history and branches; local `origin` was updated to the resulting URL. Instructor acceptance of this group variation has not been independently established.
 
 When the instructor provides a GitHub username, open repository **Settings → Collaborators → Add people**, select the exact account and send the invitation. Record whether the invitation is pending or accepted; neither status can be inferred before it happens. This local preparation did not contact or invite anyone.
